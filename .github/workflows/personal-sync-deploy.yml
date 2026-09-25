@@ -22,6 +22,7 @@ jobs:
   sync-deploy:
     if: github.repository == 'Antidington/RSSHub-personal' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
+    environment: Production
     timeout-minutes: 15
     steps:
       - name: Check required secrets
