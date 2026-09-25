@@ -13,6 +13,8 @@
 
 工作流绑定 GitHub 的 `Production` 环境。两个 Secret 当前配置在 Settings → Environments → Production → Environment secrets；也支持同名仓库 Actions secrets，环境内同名值优先。
 
+本项目的 Vercel **Production** 环境已设置 `NODE_OPTIONS=--experimental-require-module`。新版依赖 `sanitize-html` 需要通过 CommonJS 加载 ESM 依赖；Vercel 默认禁用该能力时，构建虽可达到 Ready，函数仍会以 `ERR_REQUIRE_ESM` 启动失败并返回 HTTP 500。迁移项目时需一并配置此参数，修改后重新部署；若已有 `NODE_OPTIONS`，保留其他所需参数。参见 [Vercel Node.js 运行时说明](https://vercel.com/docs/functions/runtimes/node-js/advanced-node-configuration)。
+
 1. 将此工作流和本文提交、推送到本 fork 的 `master`，确认 GitHub 默认分支也是 `master`，并在 Actions 页面启用此 fork 的工作流。
 2. 创建仅授权 `Antidington/RSSHub-personal` 的 fine-grained GitHub PAT：仓库权限 **Contents: Read and write**、**Workflows: Read and write**。上游会修改 `.github/workflows/`，因此仅使用普通 `GITHUB_TOKEN` 的 contents 写权限不足以处理这类更新。将 PAT 保存为仓库 Actions secret `UPSTREAM_SYNC_TOKEN`，不要写入文件或日志。令牌用户需要有仓库写权限，令牌需要在有效期内；分支保护规则也必须允许该用户推送，否则同步会安全失败。
 3. 在 Vercel 导入或连接 **`Antidington/RSSHub-personal`**，生产分支设为 **`master`**，根目录设为仓库根目录。在 Project Settings → Git → Deploy Hooks 中创建绑定 `master` 的 Hook，将完整 URL 保存为 GitHub Actions secret **`VERCEL_DEPLOY_HOOK`**。此 URL 本身就是凭据。
