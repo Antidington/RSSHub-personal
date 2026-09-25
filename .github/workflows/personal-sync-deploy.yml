@@ -1,0 +1,97 @@
+name: Sync upstream and deploy to Vercel
+
+on:
+  schedule:
+    # Every six hours, at 00:23 / 06:23 / 12:23 / 18:23 UTC.
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      redeploy:
+        description: Deploy even when upstream has no new commits
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: personal-sync-deploy-master
+  cancel-in-progress: false
+
+jobs:
+  sync-deploy:
+    if: github.repository == 'Antidington/RSSHub-personal' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check required secrets
+        env:
+          SYNC_TOKEN: ${{ secrets.UPSTREAM_SYNC_TOKEN }}
+          DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [[ -z "$SYNC_TOKEN" || -z "$DEPLOY_HOOK" ]]; then
+            echo '::error::Configure UPSTREAM_SYNC_TOKEN and VERCEL_DEPLOY_HOOK first. See PERSONAL_DEPLOYMENT.md.'
+            exit 1
+          fi
+
+      - name: Check out the current fork branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: master
+          fetch-depth: 0
+          token: ${{ secrets.UPSTREAM_SYNC_TOKEN }}
+
+      - name: Merge upstream without overwriting fork changes
+        id: sync
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch --no-tags https://github.com/DIYgod/RSSHub.git master
+          upstream_sha=$(git rev-parse FETCH_HEAD)
+          before_sha=$(git rev-parse HEAD)
+          if ! git merge --no-edit "$upstream_sha"; then
+            git merge --abort || true
+            echo '::error::Upstream merge failed. Resolve conflicts locally; nothing was pushed or deployed.'
+            exit 1
+          fi
+          after_sha=$(git rev-parse HEAD)
+          if [[ "$before_sha" != "$after_sha" ]]; then
+            # A concurrent remote update rejects this push; never force-push.
+            git push origin HEAD:refs/heads/master
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+          fi
+          {
+            echo "Upstream commit: \`$upstream_sha\`"
+            echo "Fork commit: \`$after_sha\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Request a Vercel deployment
+        if: steps.sync.outputs.changed == 'true' || inputs.redeploy == true
+        env:
+          DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          response="$RUNNER_TEMP/personal-vercel-hook.json"
+          # Do not retry a POST automatically: a timeout may still have queued a deployment.
+          if ! curl --silent --show-error --fail --connect-timeout 15 --max-time 60 \
+            --request POST --output "$response" "$DEPLOY_HOOK"; then
+            echo '::error::Deploy Hook request failed or its outcome is unknown. Check Vercel before requesting another deployment.'
+            exit 1
+          fi
+          if ! jq -e '.job.id | type == "string" and length > 0' "$response" > /dev/null; then
+            echo '::error::Vercel did not return a deployment job ID. Check its dashboard before retrying.'
+            exit 1
+          fi
+          {
+            echo 'Vercel accepted the deployment request.'
+            echo 'This does not confirm a successful build or a healthy service. Check Vercel Deployments and test your RSS routes.'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Report unchanged upstream
+        if: steps.sync.outputs.changed == 'false' && inputs.redeploy != true
+        run: echo 'No new upstream commits; deployment skipped.' >> "$GITHUB_STEP_SUMMARY"
