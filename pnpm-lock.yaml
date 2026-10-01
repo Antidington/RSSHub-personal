@@ -147,8 +147,8 @@ importers:
         specifier: 0.7.3
         version: 0.7.3
       imapflow:
-        specifier: 2.1.0
-        version: 2.1.0
+        specifier: 2.1.1
+        version: 2.1.1
       ioredis:
         specifier: 6.0.0
         version: 6.0.0
@@ -3439,8 +3439,8 @@ packages:
   '@yuku-toolchain/types@0.9.3':
     resolution: {integrity: sha512-rFE+5P4g2wxko5C85MugJOlVjBHEQq87dIkhLkniLXLp63PEtgaFjD954i5HXlfnyzLxPcZHsSOVDVgmo1HToA==}
 
-  '@zone-eu/mailsplit@5.4.17':
-    resolution: {integrity: sha512-LOMzdrKRVgaghLaezIPdHRhsGpfDiWNQo1RptWc84CRllI4dWLwqX/L4x1iTt1CaeyvyUfMXM/6mjIsEisT3Tg==}
+  '@zone-eu/mailsplit@5.4.18':
+    resolution: {integrity: sha512-ufNquC1VWilkF6IUyy7+qYA19Q1JXNkeiiSIgS9+f7ojNs5ijHLg03FUcXDCR2tDDJ51zSoPNTsUu4DQz613KQ==}
 
   abbrev@3.0.1:
     resolution: {integrity: sha512-AO2ac6pjRB3SJmGJo+v5/aK6Omggp6fsLrs6wN9bd35ulu4cCwaAU9+7ZhXjeqHVkaHThLuzH0nZr0YpCDhygg==}
@@ -4562,8 +4562,8 @@ packages:
     resolution: {integrity: sha512-brTTsvFRt5C1gGHtPst/281UjPD5t9fBqbgoMPlVWy11ZLTPfu7HxK4ZYqO9H7o/yC9rSTCI85EaQ4OoY12qYw==}
     engines: {node: '>= 4'}
 
-  imapflow@2.1.0:
-    resolution: {integrity: sha512-sf4FImfOPV4ajAbtZRqFEQ1A7bZd4Ow3cNiQqkd3rVY1JdKIHo/SVXRnS8URv9r4ByYAu7yr7bjkWjPdYSb6xQ==}
+  imapflow@2.1.1:
+    resolution: {integrity: sha512-AElpiKc/llWTJy17Igs5qqjTfSCAwRc7zFuRcb3PHHX55g+Sy4z8E3GjQRKhLUSKvVE8f3wMdn6K/GWEBuXcyw==}
     engines: {node: '>=20.0.0'}
 
   import-without-cache@0.4.0:
@@ -4809,8 +4809,8 @@ packages:
   libbase64@1.3.0:
     resolution: {integrity: sha512-GgOXd0Eo6phYgh0DJtjQ2tO8dc0IVINtZJeARPeiIJqge+HdsWSuaDTe8ztQ7j/cONByDZ3zeB325AHiv5O0dg==}
 
-  libmime@5.4.4:
-    resolution: {integrity: sha512-d3zZ2k8s6iO+8u9Vfkl6HfhD5lSVocGcmOViTz/i0CJcwhJADyubEJ/+TkBhuLDUSIBOiG+D8G5kJKwXwKbXXA==}
+  libmime@5.4.5:
+    resolution: {integrity: sha512-5xZSF0j71GqXMEolQAnS/gOD4nHrAhf9nPWdqvfIXXeFODx0T4BlO9XudlXe9AgDKAoOkR2YeFagQ1Dwy1v6RQ==}
 
   libqp@2.1.1:
     resolution: {integrity: sha512-0Wd+GPz1O134cP62YU2GTOPNA7Qgl09XwCqM5zpBv87ERCXdfDtyKXvV7c9U22yWJh44QZqBocFnXN11K96qow==}
@@ -8768,10 +8768,10 @@ snapshots:
 
   '@yuku-toolchain/types@0.9.3': {}
 
-  '@zone-eu/mailsplit@5.4.17':
+  '@zone-eu/mailsplit@5.4.18':
     dependencies:
       libbase64: 1.3.0
-      libmime: 5.4.4
+      libmime: 5.4.5
       libqp: 2.1.1
 
   abbrev@3.0.1: {}
@@ -9999,13 +9999,13 @@ snapshots:
 
   ignore@7.0.9: {}
 
-  imapflow@2.1.0:
+  imapflow@2.1.1:
     dependencies:
-      '@zone-eu/mailsplit': 5.4.17
+      '@zone-eu/mailsplit': 5.4.18
       encoding-japanese: 2.4.0
       iconv-lite: 0.7.3
       libbase64: 1.3.0
-      libmime: 5.4.4
+      libmime: 5.4.5
       libqp: 2.1.1
       pino: 10.3.1
       socks: 2.8.10
@@ -10231,7 +10231,7 @@ snapshots:
 
   libbase64@1.3.0: {}
 
-  libmime@5.4.4:
+  libmime@5.4.5:
     dependencies:
       encoding-japanese: 2.4.0
       iconv-lite: 0.7.3
