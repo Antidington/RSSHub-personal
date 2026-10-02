@@ -13,7 +13,7 @@ on:
 
 jobs:
     review-pr:
-        if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+        if: vars.OPENCODE_MODEL != '' && (github.event_name == 'workflow_dispatch' || (github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'))
         runs-on: ubuntu-latest
         timeout-minutes: 10
         permissions:
@@ -36,11 +36,11 @@ jobs:
               run: |
                   gh api "repos/${PR_TARGET_REPO}/pulls" \
                     --method GET -f head="${PR_BRANCH}" -f state=open \
-                    --jq '.[0] | "number=\(.number)"' \
+                    --jq '.[0] | select(.number != null) | "number=\(.number)"' \
                     >> "${GITHUB_OUTPUT}"
 
             - name: Check PR author
-              if: github.event_name != 'workflow_dispatch'
+              if: github.event_name != 'workflow_dispatch' && steps.source-run-info.outputs.number != ''
               id: check-pr-author
               env:
                   GH_TOKEN: ${{ github.token }}
@@ -69,15 +69,15 @@ jobs:
                   Please fix the Docker build test issues first."
 
             - name: Set up Bun
-              if: github.event_name == 'workflow_dispatch' || (steps.check-pr-author.outputs.skip != 'true' && github.event.workflow_run.conclusion != 'failure')
+              if: github.event_name == 'workflow_dispatch' || (steps.check-pr-author.outputs.skip == 'false' && github.event.workflow_run.conclusion != 'failure')
               uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
 
             - name: Install opencode
-              if: github.event_name == 'workflow_dispatch' || (steps.check-pr-author.outputs.skip != 'true' && github.event.workflow_run.conclusion != 'failure')
+              if: github.event_name == 'workflow_dispatch' || (steps.check-pr-author.outputs.skip == 'false' && github.event.workflow_run.conclusion != 'failure')
               run: curl -fsSL https://opencode.ai/install | bash
 
             - name: Review PR with rules
-              if: github.event_name == 'workflow_dispatch' || (steps.check-pr-author.outputs.skip != 'true' && github.event.workflow_run.conclusion != 'failure')
+              if: github.event_name == 'workflow_dispatch' || (steps.check-pr-author.outputs.skip == 'false' && github.event.workflow_run.conclusion != 'failure')
               env:
                   OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

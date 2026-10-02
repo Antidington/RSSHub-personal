@@ -4,7 +4,8 @@ on: pull_request
 
 jobs:
     dependabot-fork:
-        if: github.repository_owner != 'DIYgod' && github.actor == 'dependabot[bot]'
+        # This deployment fork follows upstream dependency updates without posting bot commands.
+        if: github.repository != 'Antidington/RSSHub-personal' && github.repository_owner != 'DIYgod' && github.actor == 'dependabot[bot]'
         runs-on: ubuntu-slim
         name: Ignore dependabot on forks
         timeout-minutes: 5
@@ -16,4 +17,4 @@ jobs:
               uses: thollander/actions-comment-pull-request@24bffb9b452ba05a4f3f77933840a6a841d1b32b # v3.0.1
               with:
                   message: '@dependabot ignore this dependency'
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
