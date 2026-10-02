@@ -29,7 +29,7 @@ jobs:
                   if [ -n "$SEMGREP_APP_TOKEN" ]; then
                     semgrep ci --no-suppress-errors --sarif --output semgrep.sarif
                   else
-                    semgrep scan --config auto --metrics off --sarif --output semgrep.sarif
+                    semgrep scan --config p/default --metrics off --sarif --output semgrep.sarif
                   fi
               env:
                   SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}

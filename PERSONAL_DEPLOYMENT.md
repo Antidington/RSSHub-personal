@@ -39,7 +39,7 @@ Vercel 按请求运行函数，不需要另行执行 `npm start` 或设置常驻
 ### 上游辅助工作流在本 fork 的处理
 
 - 个人同步工作流遵循仓库 `oxfmt` 格式，避免上游 Format 作业尝试重写工作流后，因其 `GITHUB_TOKEN` 没有 Workflows 写权限而推送失败。不向格式化任务提供同步 PAT。
-- Semgrep 未配置 `SEMGREP_APP_TOKEN` 时使用 Community Edition 的 `--config auto` 规则扫描，成功生成 SARIF 后上传；配置平台令牌时继续使用平台规则。扫描运行成功不表示零发现，具体结果见 GitHub Code scanning。
+- Semgrep 未配置 `SEMGREP_APP_TOKEN` 时使用 Community Edition 的 `--config p/default` 规则扫描并关闭遥测，成功生成 SARIF 后上传；配置平台令牌时继续使用平台规则。扫描运行成功不表示零发现，具体结果见 GitHub Code scanning。
 - AI PR 审核仅在设置 `OPENCODE_MODEL` 后启用；启用前还需配置 `OPENCODE_API_KEY` 并确认服务费用。自动触发只接受成功的 PR 构建，找不到仍开放的 PR 时不执行审核。本 fork 当前未配置该服务。
 - 本 fork 跳过自动发送 `@dependabot ignore` 评论，不扩大 Dependabot 作业的写权限；依赖 PR 继续接受测试，不能把未合并 PR 的失败当成生产主分支故障。
 
