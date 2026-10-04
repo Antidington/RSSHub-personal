@@ -4528,6 +4528,9 @@
   "/f95zone/thread/:thread": [
     "wsmbsbbz"
   ],
+  "/facebook/page/:id": [
+    "TonyRL"
+  ],
   "/famitsu/category/:category?": [
     "TonyRL"
   ],
@@ -9277,7 +9280,7 @@
   "/xmanhua/:uid": [
     "Ye11"
   ],
-  "/xmlcom/": [
+  "/xml/": [
     "AboutRSS"
   ],
   "/xmnn/epaper/:id?": [
