@@ -142,7 +142,7 @@
         "winston": "3.19.0",
         "x-client-transaction-id": "0.3.2",
         "xxhash-wasm": "1.1.0",
-        "youtube-caption-extractor": "1.10.2",
+        "youtube-caption-extractor": "1.10.3",
         "youtubei.js": "18.1.0",
         "zod": "4.6.5"
     },
