@@ -104,7 +104,9 @@ async function handler() {
 
                 const $ = load(data.courseInfo.description, null, false);
                 $('img').each((_, img) => {
-                    img.attribs.src = img.attribs.src.split('?', 1)[0];
+                    if (img.attribs.src) {
+                        img.attribs.src = img.attribs.src.split('?', 1)[0];
+                    }
                     delete img.attribs.width;
                 });
 

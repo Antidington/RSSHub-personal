@@ -2,6 +2,7 @@ import { load } from 'cheerio';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone.js';
 import utc from 'dayjs/plugin/utc.js';
+import pMap from 'p-map';
 
 import type { Route } from '@/types';
 import cache from '@/utils/cache';
@@ -18,6 +19,13 @@ const articleCacheKey = 'phoronix:articles';
 
 const baseUrl = 'https://www.phoronix.com';
 const rssUrl = `${baseUrl}/rss.php`;
+
+type ArticleItem = {
+    link?: string;
+    title?: string;
+    pubDate?: string;
+    category?: string | string[];
+};
 
 const feedFetch = async () => {
     const feedStr = await ofetch(rssUrl);
@@ -159,8 +167,11 @@ async function handler(ctx) {
             break;
     }
 
-    feed.item = await Promise.all(
-        feed.item.map((item) =>
+    const list: ArticleItem[] = feed.item;
+    const articles = list.filter((item): item is ArticleItem & { link: string } => typeof item.link === 'string' && item.link.length > 0);
+    feed.item = await pMap(
+        articles,
+        (item) =>
             cache.tryGet(`${articleCacheKey}:${item.link}`, async () => {
                 const response = await got(item.link);
                 const html = response.body;
@@ -249,7 +260,10 @@ async function handler(ctx) {
                 }
                 // High-res images
                 images.each((_, img) => {
-                    img.attribs.src = img.attribs.src.replace(/_med$/, '');
+                    // Some pages carry a stray <img> without src (e.g. /review/ubuntu-2610-amd64v3-epyc/5)
+                    if (img.attribs.src) {
+                        img.attribs.src = img.attribs.src.replace(/_med$/, '');
+                    }
                 });
 
                 return {
@@ -262,8 +276,8 @@ async function handler(ctx) {
                     image: $('meta[name="twitter:image"]').attr('content'),
                     category: item.category || category,
                 };
-            })
-        )
+            }),
+        { concurrency: 3 }
     );
 
     return feed;

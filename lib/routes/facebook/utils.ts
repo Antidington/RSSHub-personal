@@ -71,7 +71,8 @@ const renderImage = (media: any) => {
     return image ? `<img src="${image}" alt="${media.accessibility_caption ?? ''}">` : '';
 };
 
-const renderVideo = (video: any) => `<video controls poster="${video.preferred_thumbnail?.image.uri}" src="${video.videoDeliveryLegacyFields.browser_native_hd_url ?? video.videoDeliveryLegacyFields.browser_native_sd_url}"></video>`;
+export const renderVideo = (video: any) =>
+    `<video controls preload="metadata" poster="${video.preferred_thumbnail?.image.uri}" src="${video.videoDeliveryLegacyFields.browser_native_hd_url ?? video.videoDeliveryLegacyFields.browser_native_sd_url}"></video>`;
 
 const renderAttachment = (attachment: any): string => {
     if (attachment.all_subattachments) {
@@ -93,7 +94,7 @@ const renderAttachment = (attachment: any): string => {
     return link ? `<p><a href="${link}">${img}<br>${attachment.title_with_entities?.text ?? ''}</a></p>` : img;
 };
 
-const renderText = (message: any) => {
+export const renderText = (message: any) => {
     const chars = [...message.text];
     let html = '';
     let position = 0;
@@ -125,7 +126,7 @@ const inlineTags = new Map([
 ]);
 
 const renderRichBlock = (block: any) => {
-    const chars = [...block.text];
+    let chars = [...block.text];
     const marks = block.inline_style_ranges
         .flatMap((range: any) => {
             const tag = inlineTags.get(range.inline_style);
@@ -138,7 +139,7 @@ const renderRichBlock = (block: any) => {
         })
         .toSorted((a: any, b: any) => b.at - a.at || Number(a.html.startsWith('</')) - Number(b.html.startsWith('</')));
     for (const mark of marks) {
-        chars.splice(mark.at, 0, mark.html);
+        chars = chars.toSpliced(mark.at, 0, mark.html);
     }
     const tag = blockTags.get(block.block_type) ?? 'p';
     return `<${tag}>${chars.join('')}</${tag}>`;
@@ -152,7 +153,7 @@ const renderStory = (story: any) => {
     return { text: message?.text as string | undefined, html: text + attachments };
 };
 
-export const fetchStories = async (friendlyName: string, docId: string, variables: Record<string, string | number | boolean>, limit: number) => {
+export const fetchGraphql = async (friendlyName: string, docId: string, variables: Record<string, string | number | boolean | null>, limit: number, collect: (lines: any[]) => any[]) => {
     const lsd = randomBytes(16).toString('base64url');
     const jazoest = `2${[...lsd].reduce((sum, char) => sum + char.codePointAt(0)!, 0)}`;
 
@@ -169,12 +170,13 @@ export const fetchStories = async (friendlyName: string, docId: string, variable
           )
         : undefined;
 
-    const stories: any[] = [];
+    const items: any[] = [];
     let pageInfo = { has_next_page: true, end_cursor: null as string | null };
-    while (pageInfo.has_next_page && stories.length < limit) {
+    while (pageInfo.has_next_page && items.length < limit) {
+        const cursor = pageInfo.end_cursor;
         // oxlint-disable-next-line no-await-in-loop - depends on previous response for cursor
         const text = (await cache.tryGet(
-            `facebook:${friendlyName}:${variables.id}:${pageInfo.end_cursor ?? ''}`,
+            `facebook:${friendlyName}:${variables.id}:${cursor ?? ''}`,
             () =>
                 ofetch(`${baseUrl}/api/graphql/`, {
                     method: 'POST',
@@ -184,35 +186,45 @@ export const fetchStories = async (friendlyName: string, docId: string, variable
                         jazoest,
                         ...(dtsg && { fb_dtsg: dtsg }),
                         fb_api_req_friendly_name: friendlyName,
-                        variables: JSON.stringify({
-                            ...providerVariables,
-                            ...variables,
-                            count: 3,
-                            cursor: pageInfo.end_cursor,
-                            scale: 1,
-                            useDefaultActor: false,
-                        }),
+                        variables: JSON.stringify({ ...variables, cursor }),
                         doc_id: docId,
                     }),
                 }),
-            pageInfo.end_cursor ? config.cache.contentExpire : config.cache.routeExpire,
-            !!pageInfo.end_cursor
+            cursor ? config.cache.contentExpire : config.cache.routeExpire,
+            !!cursor
         )) as string;
 
-        const lines = text.split('\n');
-        let next;
-        for (const line of lines) {
-            const data = JSON.parse(line);
-            collectStories(data, stories);
-            next ??= findPageInfo(data);
-        }
+        const lines = text.split('\n').map((line) => JSON.parse(line));
+        const next = lines.map((data) => findPageInfo(data)).find(Boolean);
         if (!next) {
-            throw new Error(`Facebook GraphQL failed: ${JSON.parse(lines[0]).errors?.[0]?.message ?? text}`);
+            throw new Error(`Facebook GraphQL failed: ${lines[0].errors?.[0]?.message ?? text}`);
         }
+        items.push(...collect(lines));
         pageInfo = next;
     }
-    return stories;
+    return items.slice(0, limit);
 };
+
+export const fetchStories = (friendlyName: string, docId: string, variables: Record<string, string | number | boolean>, limit: number) =>
+    fetchGraphql(
+        friendlyName,
+        docId,
+        {
+            ...providerVariables,
+            ...variables,
+            count: 3,
+            scale: 1,
+            useDefaultActor: false,
+        },
+        limit,
+        (lines) => {
+            const stories: any[] = [];
+            for (const data of lines) {
+                collectStories(data, stories);
+            }
+            return stories;
+        }
+    );
 
 export const storiesToItems = (stories: any[]) =>
     stories.map((node): DataItem => {
@@ -223,7 +235,19 @@ export const storiesToItems = (stories: any[]) =>
             title: (own.text ?? shared?.text)?.split('\n', 1)[0] ?? node.actors[0].name,
             description: own.html + (shared?.html ?? ''),
             link: node.permalink_url,
+            guid: `facebook:${node.post_id}`,
             pubDate: parseDate(node.creation_time, 'X'),
             author: node.actors[0].name,
         };
     });
+
+export const fetchCollection = async (id: string, tab: string, tabKey: string) =>
+    (await cache.tryGet(`facebook:${tabKey}:${id}`, async () => {
+        const html = await ofetch(`${baseUrl}/${id}/${tab}`);
+        const collectionId = html.match(new RegExp(`"tab_key":"${tabKey}","id":"([^"]+)"`))?.[1];
+        if (!collectionId) {
+            throw new Error(`Facebook ${tab} of ${id} not found`);
+        }
+        const name = html.match(/"nav_collections":\{"nodes":\[\{"id":"[^"]+","name":"((?:[^"\\]|\\.)*)"/)?.[1];
+        return { id: collectionId, name: name && JSON.parse(`"${name}"`) };
+    })) as { id: string; name?: string };

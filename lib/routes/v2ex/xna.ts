@@ -5,10 +5,11 @@ import type { Route } from '@/types';
 import { ViewType } from '@/types';
 import got from '@/utils/got';
 import { parseRelativeDate } from '@/utils/parse-date';
+import { getRouteLimit } from '@/utils/route-limit';
 
 export const route: Route = {
     path: '/xna',
-    categories: ['bbs', 'blog'],
+    categories: ['bbs'],
     view: ViewType.Articles,
     example: '/v2ex/xna',
     parameters: {},
@@ -38,9 +39,10 @@ async function handler(ctx) {
     });
 
     const $ = load(response.data);
+    const limit = getRouteLimit(ctx, 50);
     const items = $('div.xna-entry-main-container')
         .toArray()
-        .slice(0, ctx.req.query('limit') ? Number.parseInt(ctx.req.query('limit')) : 50)
+        .slice(0, limit)
         .map((dom) => {
             const link = $(dom).find('.xna-entry-title > a');
             const author = $(dom).find('.xna-source-author > a').text();
@@ -49,9 +51,9 @@ async function handler(ctx) {
             return {
                 title: $(link).text(),
                 link: $(link).attr('href'),
-                description: $(link).text(),
                 author,
-                pubDate: dateText ? parseRelativeDate(dateText) : undefined,
+                // Entries older than a day show a month and day without a year, such as `10 月 31 日`
+                pubDate: dateText ? parseRelativeDate(dateText, 'M 月 D 日') : undefined,
             };
         });
 
