@@ -13,6 +13,7 @@ on:
 
 permissions:
     contents: read
+    statuses: read
 
 concurrency:
     group: personal-sync-deploy-master
@@ -52,12 +53,13 @@ jobs:
                   git fetch --no-tags https://github.com/DIYgod/RSSHub.git master
                   upstream_sha=$(git rev-parse FETCH_HEAD)
                   before_sha=$(git rev-parse HEAD)
-                  if ! git merge --no-edit "$upstream_sha"; then
+                  if ! git -c merge.personal-dependabot.driver=true merge --no-edit "$upstream_sha"; then
                     git merge --abort || true
                     echo '::error::Upstream merge failed. Resolve conflicts locally; nothing was pushed or deployed.'
                     exit 1
                   fi
                   after_sha=$(git rev-parse HEAD)
+                  echo "fork_sha=$after_sha" >> "$GITHUB_OUTPUT"
                   if [[ "$before_sha" != "$after_sha" ]]; then
                     # A concurrent remote update rejects this push; never force-push.
                     git push origin HEAD:refs/heads/master
@@ -71,6 +73,7 @@ jobs:
                   } >> "$GITHUB_STEP_SUMMARY"
 
             - name: Request a Vercel deployment
+              id: deploy
               if: steps.sync.outputs.changed == 'true' || inputs.redeploy == true
               env:
                   DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
@@ -78,6 +81,7 @@ jobs:
               run: |
                   set -euo pipefail
                   response="$RUNNER_TEMP/personal-vercel-hook.json"
+                  echo "requested_after=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_OUTPUT"
                   # Do not retry a POST automatically: a timeout may still have queued a deployment.
                   if ! curl --silent --show-error --fail --connect-timeout 15 --max-time 60 \
                     --request POST --output "$response" "$DEPLOY_HOOK"; then
@@ -90,9 +94,59 @@ jobs:
                   fi
                   {
                     echo 'Vercel accepted the deployment request.'
-                    echo 'This does not confirm a successful build or a healthy service. Check Vercel Deployments and test your RSS routes.'
+                    echo 'Production verification follows after Vercel reports the target commit deployed.'
                   } >> "$GITHUB_STEP_SUMMARY"
 
             - name: Report unchanged upstream
               if: steps.sync.outputs.changed == 'false' && inputs.redeploy != true
               run: echo 'No new upstream commits; deployment skipped.' >> "$GITHUB_STEP_SUMMARY"
+
+            - name: Verify production deployment and RSS
+              env:
+                  GH_TOKEN: ${{ github.token }}
+                  EXPECTED_SHA: ${{ steps.sync.outputs.fork_sha }}
+                  REQUIRE_FRESH_STATUS: ${{ steps.sync.outputs.changed == 'false' && inputs.redeploy == true }}
+                  DEPLOY_REQUESTED_AFTER: ${{ steps.deploy.outputs.requested_after }}
+              run: |
+                  python3 - <<'PY'
+                  import json
+                  import os
+                  import time
+                  import urllib.request
+                  import xml.etree.ElementTree as ET
+
+                  url = f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/commits/{os.environ['EXPECTED_SHA']}/status"
+                  request = urllib.request.Request(url, headers={
+                      'Authorization': f"Bearer {os.environ['GH_TOKEN']}",
+                      'Accept': 'application/vnd.github+json',
+                  })
+                  deadline = time.monotonic() + 600
+                  for attempt in range(40):
+                      with urllib.request.urlopen(request, timeout=30) as response:
+                          statuses = json.load(response)['statuses']
+                      status = next((entry for entry in statuses if entry['context'] == 'Vercel'), None)
+                      fresh = status is not None and (
+                          os.environ['REQUIRE_FRESH_STATUS'] != 'true'
+                          or status['updated_at'] >= os.environ['DEPLOY_REQUESTED_AFTER']
+                      )
+                      if fresh and status['state'] == 'success':
+                          print(f"Vercel deployed {os.environ['EXPECTED_SHA']}")
+                          break
+                      if fresh and status['state'] in ('failure', 'error'):
+                          raise SystemExit(f"Vercel deployment failed: {status['target_url']}")
+                      if attempt == 39 or time.monotonic() >= deadline:
+                          raise SystemExit('Vercel did not confirm deployment within 10 minutes. Check its dashboard before redeploying.')
+                      time.sleep(15)
+
+                  origin = 'https://rss-hub-mizuhala.vercel.app'
+                  for path in ('/', '/healthz', '/rsshub/routes?limit=3'):
+                      with urllib.request.urlopen(origin + path, timeout=30) as response:
+                          content = response.read()
+                      if path == '/healthz' and content.strip() != b'ok':
+                          raise SystemExit('Production healthz returned an unexpected response.')
+                      if path.startswith('/rsshub/'):
+                          items = ET.fromstring(content).findall('./channel/item')
+                          if len(items) != 3:
+                              raise SystemExit(f'Expected 3 RSS items, received {len(items)}.')
+                      print(f'Production check passed: {path}')
+                  PY

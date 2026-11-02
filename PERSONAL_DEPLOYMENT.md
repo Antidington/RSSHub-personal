@@ -1,13 +1,16 @@
 # 本 fork 的自动同步与 Vercel 部署
 
-配置核对日期：2026-10-02。工作流位于 `.github/workflows/personal-sync-deploy.yml`。
+配置核对日期：2026-11-03。工作流位于 `.github/workflows/personal-sync-deploy.yml`。
 
 ## 工作方式
 
 - 每 6 小时将 `DIYgod/RSSHub` 的 `master` 合并至 `Antidington/RSSHub-personal` 的 `master`，保留上游 commit 历史和本 fork 的独立修改。跟踪开发分支最新提交，不以 release/tag 为更新条件，也不复制上游 tags 或 GitHub Releases。
 - 有新提交且推送成功后，调用 Vercel Deploy Hook。没有新提交时不部署；手动运行时可以勾选 `redeploy` 重新部署。
 - 合并冲突或推送失败时停止，不强制覆盖远端，不请求部署。需要先处理冲突或重新运行同步。
-- Actions 成功仅代表同步成功及部署请求被接受；构建成功和实际路由可用性需要在 Vercel 和站点上验证。
+- 每次运行都核对目标 fork commit 的 Vercel 状态，再检查生产首页、`/healthz` 和 `/rsshub/routes?limit=3`。RSS 验收要求能解析出 3 条内容。没有新提交时也核对部署 SHA，避免旧站点可用掩盖目标版本部署失败。
+- 手动勾选 `redeploy` 且 commit 未变时，工作流要求 Vercel 状态在本次 Hook 请求后更新，避免把旧的成功记录当作本次部署完成。等待超时或检查失败会使本次运行失败。
+- 本仓库不单独创建常规 Dependabot 版本升级 PR；依赖升级随上游同步进入。三个生态的 `open-pull-requests-limit` 均为 `0`，不关闭 Dependabot 安全更新。
+- `vercel.json` 排除 `dependabot/**` 分支的自动部署；`master` 部署和 Deploy Hook 保留。Vercel 项目的 Pull Request Comments 已关闭，上游 `github.silent: true` 配置也保留。
 
 ## 一次性配置
 
@@ -28,7 +31,7 @@ Vercel 的 Git 集成也可能在 PAT 推送后自动触发部署，因此可能
 
 1. 在 Actions summary 确认 upstream SHA 和 fork SHA；合并可能生成额外 merge commit，因此两个 SHA 不必相同。
 2. 在 Vercel Deployments 中确认本次目标提交达到 **Ready**，并确认为生产部署。
-3. 访问生产域名及你实际使用的一条 RSS 路由，确认返回预期内容。需要浏览器、登录凭据或外部依赖的路由应分别验证。
+3. 检查 Actions 的 **Verify production deployment and RSS** 步骤。确认 Vercel 部署状态、健康响应 `ok` 和 3 条 RSS 内容均通过。你实际使用的其他订阅路由仍需分别验收。
 
 Vercel 按请求运行函数，不需要另行执行 `npm start` 或设置常驻保活任务。重新部署会构建并发布新版本，不代表所有 RSSHub 路由都能在 Serverless 环境运行。
 
@@ -36,18 +39,35 @@ Vercel 按请求运行函数，不需要另行执行 `npm start` 或设置常驻
 
 ## 故障处理
 
-### 上游辅助工作流在本 fork 的处理
+### 保留 fork 策略，避免反复合并冲突
 
-- 个人同步工作流遵循仓库 `oxfmt` 格式，避免上游 Format 作业尝试重写工作流后，因其 `GITHUB_TOKEN` 没有 Workflows 写权限而推送失败。不向格式化任务提供同步 PAT。
-- Semgrep 未配置 `SEMGREP_APP_TOKEN` 时使用 Community Edition 的 `--config p/default` 规则扫描并关闭遥测，成功生成 SARIF 后上传；配置平台令牌时继续使用平台规则。扫描运行成功不表示零发现，具体结果见 GitHub Code scanning。
-- AI PR 审核仅在设置 `OPENCODE_MODEL` 后启用；启用前还需配置 `OPENCODE_API_KEY` 并确认服务费用。自动触发只接受成功的 PR 构建，找不到仍开放的 PR 时不执行审核。本 fork 当前未配置该服务。
-- 本 fork 跳过自动发送 `@dependabot ignore` 评论，不扩大 Dependabot 作业的写权限；依赖 PR 继续接受测试，不能把未合并 PR 的失败当成生产主分支故障。
+2026-10-09 至 2026-11-03，个人修改过的 `pr-review.yml` 与上游冲突，导致连续 86 次同步失败。恢复时将共享的 `pr-review.yml`、`dependabot-fork.yml` 和 `semgrep.yml` 还原为上游内容。个人安全扫描改用独立的 `.github/workflows/personal-security.yml`。
 
-2026-10-02 检查：启用以来 24 次同步运行的最终结果均成功，最近 8 次 master Test 均成功；线上 `/healthz` 和 `/rsshub/routes?limit=3` 返回 HTTP 200。历史失败记录保留，修复后的作业需要以新运行结果验收。
+`.github/dependabot.yml` 是本部署仓库拥有的策略文件。`.gitattributes` 仅为这个路径指定 `personal-dependabot` merge driver；同步命令通过 `-c merge.personal-dependabot.driver=true` 保留本地策略。这样，上游改动不会重新打开常规依赖升级 PR。此规则不应用于业务代码、Vercel 配置或其他工作流；其他路径发生冲突时仍中止同步。
+
+手动同步时使用相同的 driver 配置：
+
+```bash
+git fetch --no-tags https://github.com/DIYgod/RSSHub.git master
+git -c merge.personal-dependabot.driver=true merge --no-edit FETCH_HEAD
+```
+
+若上游新增包管理器或目录，先核查本地 Dependabot 策略是否也需添加对应的安全更新配置。
+
+### 辅助工作流与通知
+
+- 在本仓库的 Actions 设置中停用 `pr-review.yml`、`dependabot-fork.yml`、`ghcr-retention.yml` 和 `stale.yml`。它们分别依赖未配置的 AI 服务、发送不需要的忽略评论、清理本仓库不存在的镜像包或更新不需要的 PR 线程。共享文件保留上游原样，停用状态通过 GitHub 管理。
+- 停用上游新增的 `sync-fork.yml`，本仓库仅保留一个同步器。这个仓库在 GitHub 中不是平台 Fork，不能直接使用 `gh repo sync`，也不能让它覆盖本地部署策略。
+- 上游 `semgrep.yml` 也在本仓库停用。独立的 **Personal security scan** 保留扫描和 SARIF 上传；未配置 `SEMGREP_APP_TOKEN` 时使用 `p/default` 并关闭遥测。扫描成功不等于零告警，结果见 GitHub Code scanning。
+- CodeQL、Test、Linter 和 Format 保留。个人工作流遵循仓库 `oxfmt` 格式，不向格式化任务提供同步 PAT。
+- 本仓库不再订阅全部活动；这不会更改账号的全局邮件设置。生产工作流的失败通知继续由 GitHub Actions 通知设置控制，不用全局静音掩盖生产故障。
+- 常规依赖 PR 的旧失败记录保留。当前上游已经移除 `teleproto@1.229.0` 旧补丁和不稳定的 Ubuntu Chromium Snap 测试矩阵，后续以同步后的 Test 结果验收。
+
+在新部署仓库上复用此配置时，应核对上述工作流的停用状态；这些 GitHub 设置不会随 `git clone` 复制。
 
 - **缺少 secret**：同步前即失败，补齐两个 secret 后重新运行。
 - **401/403、workflow 权限或分支保护拒绝**：检查 PAT 的有效期、仓库范围、Contents/Workflows 权限和分支规则。不要用 force push 绕过。
-- **合并冲突**：在本地拉取 fork，再获取上游并手动合并、验证、推送。冲突解决之前工作流不会请求部署。
+- **合并冲突**：在本地拉取 fork，再按上文命令获取并合并上游、验证、推送。冲突解决之前工作流不会请求部署。共享辅助工作流优先保持上游原样，个人逻辑放在独立文件中。
 - **Hook 超时、网络错误、响应缺少 job ID**：可能已创建部署，先检查 Vercel，确认状态后再决定是否勾选 `redeploy` 重跑。流程不会自动重试 POST。
 - **同步成功但构建失败**：查看 Vercel 构建日志，修复配置或代码后手动勾选 `redeploy`。没有新上游提交时，定时任务不会重试部署。
 - **定时任务未运行**：检查工作流是否启用、是否位于默认分支，以及 Actions 使用额度。GitHub 的计划任务可能延迟；公共仓库连续 60 天无活动时计划任务可能自动停用，需手动重新启用。

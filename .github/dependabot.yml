@@ -5,7 +5,7 @@ updates:
       schedule:
           interval: daily
           time: '08:00'
-      open-pull-requests-limit: 100
+      open-pull-requests-limit: 0
       labels:
           - dependencies
       ignore:
@@ -73,7 +73,7 @@ updates:
       schedule:
           interval: daily
           time: '08:00'
-      open-pull-requests-limit: 100
+      open-pull-requests-limit: 0
       labels:
           - dependencies
       groups:
@@ -86,6 +86,6 @@ updates:
       schedule:
           interval: daily
           time: '08:00'
-      open-pull-requests-limit: 100
+      open-pull-requests-limit: 0
       labels:
           - dependencies

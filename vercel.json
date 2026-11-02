@@ -13,6 +13,11 @@
             "destination": "/favicon.png"
         }
     ],
+    "git": {
+        "deploymentEnabled": {
+            "dependabot/**": false
+        }
+    },
     "github": {
         "silent": true
     }
