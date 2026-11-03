@@ -15389,8 +15389,8 @@
         "location": "literature.ts",
         "module": "() => import('@/routes/inspirehep/literature.ts')"
       },
-      "/:collection{jobs|seminars|conferences|institutions|experiments|journals}/:q?": {
-        "path": "/:collection{jobs|seminars|conferences|institutions|experiments|journals}/:q?",
+      "/:collection{(?:jobs|seminars|conferences|institutions|experiments|journals)}/:q?": {
+        "path": "/:collection{(?:jobs|seminars|conferences|institutions|experiments|journals)}/:q?",
         "name": "Collection Search",
         "categories": [
           "journal"
@@ -17218,13 +17218,13 @@
         "maintainers": [
           "emdoe"
         ],
-        "example": "/openalex/s64187185/subfield/2604",
+        "example": "/openalex/s64187185/subfield/1312",
         "parameters": {
           "journals": "Pipe-separated journal source IDs (e.g., s64187185|s123456789)",
           "type": "Optional filter type: subfield, topic, field, or domain",
           "ids": "Optional pipe-separated filter IDs matching the type (e.g., 2604|2605 for subfields)"
         },
-        "description": "Get recent scientific publications from OpenAlex filtered by journal and optionally by topic classification (last 2 weeks).\n\nExamples:\n\n- /openalex/s64187185 - All works from a journal (no topic filter)\n- /openalex/s64187185/subfield/2604 - Filter by subfield\n- /openalex/s64187185|s123456/topic/T10001|T10002 - Filter by topic with multiple journals\n- /openalex/s64187185/field/19 - Filter by field\n- /openalex/s64187185/domain/1 - Filter by domain",
+        "description": "Get recent scientific publications from OpenAlex filtered by journal and optionally by topic classification (last 2 weeks).\n\nExamples:\n\n- /openalex/s64187185 - All works from a journal (no topic filter)\n- /openalex/s64187185/subfield/1312 - Filter by subfield\n- /openalex/s64187185|s123456/topic/T10001|T10002 - Filter by topic with multiple journals\n- /openalex/s64187185/field/19 - Filter by field\n- /openalex/s64187185/domain/1 - Filter by domain",
         "categories": [
           "journal"
         ],
@@ -31432,7 +31432,7 @@
         "maintainers": [
           "lifetraveler"
         ],
-        "example": "/air-level/rank/best,/air-level/rank",
+        "example": "/air-level/rank",
         "location": "levelrank.ts",
         "module": "() => import('@/routes/air-level/levelrank.ts')"
       }
@@ -33801,8 +33801,8 @@
   },
   "aqara": {
     "routes": {
-      "/:region{cn|kr|eu|us|ru|en}/:type?": {
-        "path": "/:region{cn|kr|eu|us|ru|en}/:type?",
+      "/:region{(?:cn|kr|eu|us|ru|en)}/:type?": {
+        "path": "/:region{(?:cn|kr|eu|us|ru|en)}/:type?",
         "categories": [
           "other"
         ],
@@ -119792,7 +119792,7 @@
           "AlanZeng423",
           "SuperPung"
         ],
-        "description": "| Focus on TJU | General News | Internal News | Media Report | Pictures of TJU |\n| :----------: | :----------: | :-----------: | :----------: | :-------------: |\n|     focus    |    general   |    internal   |     media    |     picture     |",
+        "description": "| Cover News | General News | Campus News | Media Report | Pictures of TJU |\n| :--------: | :----------: | :---------: | :----------: | :-------------: |\n|    focus   |    general   |   internal  |     media    |     picture     |",
         "location": "news/index.ts",
         "module": "() => import('@/routes/tju/news/index.ts')"
       },
@@ -161348,16 +161348,17 @@
   },
   "sina": {
     "routes": {
-      "/sports/:type?": {
-        "path": "/sports/:type?",
+      "/sports/:type": {
+        "path": "/sports/:type",
         "name": "体育",
         "categories": [
           "sport"
         ],
-        "example": "/sina/sports",
+        "example": "/sina/sports/volley",
         "parameters": {
-          "type": "类别"
+          "type": "运动类型，见下表"
         },
+        "description": "| 排球   | 游泳 | 乒乓球   | 羽毛球 | 台球    | 田径     | 体操  | 冰雪   | 射击 | 马术  | 拳击搏击 | UFC | 其他   |\n| ------ | ---- | -------- | ------ | ------- | -------- | ----- | ------ | ---- | ----- | -------- | --- | ------ |\n| volley | swim | pingpang | badmin | snooker | tianjing | ticao | winter | sh   | horse | kungfu   | ufc | others |",
         "maintainers": [
           "nczitzk"
         ],
@@ -161767,10 +161768,10 @@
         "categories": [
           "university"
         ],
-        "example": "/sjtu/gs/enroll/59",
+        "example": "/sjtu/gs/xsjy",
         "parameters": {
           "type": "类别",
-          "num": "细分类别, 仅对`type`为`enroll`或`exchange`有效"
+          "num": "细分类别, 仅对`type`为`exchange`有效"
         },
         "features": {
           "requireConfig": false,
@@ -161810,7 +161811,7 @@
         "maintainers": [
           "dzx-dzx"
         ],
-        "description": "| 工作信息 | 招生信息 | 培养信息 | 学位学科 | 国际交流 | 创新工程 |\n| -------- | -------- | -------- | -------- | -------- | -------- |\n| work     | enroll   | train    | degree   | exchange | xsjy     |\n\n当`type`为`enroll`, `num`可选字段:\n\n| 58       | 59       | 60         | 61       | 62       |\n| -------- | -------- | ---------- | -------- | -------- |\n| 博士招生 | 硕士招生 | 港澳台招生 | 考点信息 | 院系动态 |\n\n当`type`为`exchange`, `num`可选字段:\n\n| 67             | 68             | 69             | 70             | 71             |\n| -------------- | -------------- | -------------- | -------------- | -------------- |\n| 国家公派研究生 | 国际化培养资助 | 校际交换与联培 | 交流与合作项目 | 项目招募与宣讲 |",
+        "description": "| 工作信息 | 培养信息 | 学位学科 | 国际交流 | 创新工程 |\n| -------- | -------- | -------- | -------- | -------- |\n| work     | train    | degree   | exchange | xsjy     |\n\n招生信息已移至研究生招生网，请使用「研究生招生网招考信息」路由 `/sjtu/yzb/zkxx/:type`。\n\n当`type`为`exchange`, `num`可选字段:\n\n| 67             | 68             | 69             | 70             | 71             |\n| -------------- | -------------- | -------------- | -------------- | -------------- |\n| 国家公派研究生 | 国际化培养资助 | 校际交换与联培 | 交流与合作项目 | 项目招募与宣讲 |",
         "location": "gs.ts",
         "module": "() => import('@/routes/sjtu/gs.ts')"
       },
