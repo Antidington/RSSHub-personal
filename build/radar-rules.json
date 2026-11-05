@@ -3382,6 +3382,19 @@
       }
     ]
   },
+  "mi.com": {
+    "_name": "小米",
+    "m": [
+      {
+        "title": "众筹",
+        "docs": "https://docs.rsshub.app/routes/mi",
+        "source": [
+          "/crowdfunding/home"
+        ],
+        "target": "/mi/crowdfunding"
+      }
+    ]
+  },
   "mixcloud.com": {
     "_name": "Mixcloud",
     ".": [
@@ -4388,19 +4401,6 @@
           "/Profile/:uid/:handle/Store"
         ],
         "target": "/manyvids/profile/vids/:uid"
-      }
-    ]
-  },
-  "mi.com": {
-    "_name": "小米",
-    "m": [
-      {
-        "title": "众筹",
-        "docs": "https://docs.rsshub.app/routes/mi",
-        "source": [
-          "/crowdfunding/home"
-        ],
-        "target": "/mi/crowdfunding"
       }
     ]
   },
@@ -15355,6 +15355,30 @@
           "/"
         ],
         "target": "/ce/district"
+      }
+    ],
+    "paper": [
+      {
+        "title": "电子版",
+        "docs": "https://docs.rsshub.app/routes/ce",
+        "source": [
+          "/",
+          "/index.html",
+          "/pc/layout",
+          "/pc/layout/index.html",
+          "/pad/layout",
+          "/pad/layout/index.html"
+        ],
+        "target": "/ce/paper"
+      },
+      {
+        "title": "电子版",
+        "docs": "https://docs.rsshub.app/routes/ce",
+        "source": [
+          "/pc/layout/:yearMonth/:day/node_:page.html",
+          "/pad/layout/:yearMonth/:day/node_:page.html"
+        ],
+        "target": "/ce/paper/:page"
       }
     ]
   },
@@ -41837,7 +41861,7 @@
         "source": [
           "/:magazine/mulu.htm"
         ],
-        "target": "/qstheory/magazine/:magazine"
+        "target": "/qstheory/magazine/:magazine/:issue?"
       }
     ]
   },

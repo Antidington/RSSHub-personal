@@ -587,6 +587,7 @@ export type RoutePath =
   | `/cdu/tzggcdunews`
   | `/cdzjryb/zw/projectList`
   | `/ce/district/:category?`
+  | `/ce/paper/:page?`
   | `/cebbank/quotation/all`
   | `/cebbank/quotation/history/:type`
   | `/cefco/research/news`
@@ -2896,7 +2897,7 @@ export type RoutePath =
   | `/qqmusic/album/:mid`
   | `/qqorw/:category?`
   | `/qstheory/:category?`
-  | `/qstheory/magazine/:magazine`
+  | `/qstheory/magazine/:magazine/:issue?`
   | `/qttabbar/change-log`
   | `/quantamagazine/archive`
   | `/queshu/book/:bookid`

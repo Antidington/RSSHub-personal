@@ -1054,6 +1054,16 @@
   "/kuaishou/profile/:principalId": [
     "GuoChen-thlg"
   ],
+  "/mi/golden": [
+    "nczitzk"
+  ],
+  "/mi/crowdfunding": [
+    "DIYgod",
+    "nuomi1"
+  ],
+  "/mi/newproducts": [
+    "nuomi1"
+  ],
   "/mixcloud/:username/:type?": [
     "Misaka13514"
   ],
@@ -1316,6 +1326,9 @@
   "/inspirehep/authors/:id": [
     "TonyRL"
   ],
+  "/instagram/:category/:key": [
+    "TonyRL"
+  ],
   "/iwara/users/:username/:type?": [
     "Fatpandac"
   ],
@@ -1421,16 +1434,6 @@
   "/mercari/search/:query": [
     "yana9i",
     "Tsuyumi25"
-  ],
-  "/mi/golden": [
-    "nczitzk"
-  ],
-  "/mi/crowdfunding": [
-    "DIYgod",
-    "nuomi1"
-  ],
-  "/mi/newproducts": [
-    "nuomi1"
   ],
   "/missevan/drama/:id": [
     "FlashWingShadow"
@@ -3112,6 +3115,9 @@
   ],
   "/ce/district/:category?": [
     "cscnk52"
+  ],
+  "/ce/paper/:page?": [
+    "zhangsan-xyz"
   ],
   "/cebbank/quotation/all": [
     "linbuxiao"
@@ -7219,9 +7225,10 @@
   "/qstheory/:category?": [
     "nczitzk"
   ],
-  "/qstheory/magazine/:magazine": [
+  "/qstheory/magazine/:magazine/:issue?": [
     "TonyRL",
-    "cscnk52"
+    "cscnk52",
+    "zhangsan-xyz"
   ],
   "/qttabbar/change-log": [
     "nczitzk"
@@ -11291,9 +11298,6 @@
     "KarasuShin",
     "ranpox",
     "xyqfer"
-  ],
-  "/instagram/:category/:key": [
-    "TonyRL"
   ],
   "/iplaysoft/": [
     "kimi360",

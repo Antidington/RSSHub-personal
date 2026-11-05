@@ -12456,6 +12456,82 @@
     ],
     "lang": "zh-CN"
   },
+  "mi": {
+    "routes": {
+      "/golden": {
+        "path": "/golden",
+        "categories": [
+          "program-update"
+        ],
+        "example": "/mi/golden",
+        "name": "小米应用商店金米奖",
+        "maintainers": [
+          "nczitzk"
+        ],
+        "location": "golden.ts",
+        "module": "() => import('@/routes/mi/golden.ts')"
+      },
+      "/crowdfunding": {
+        "path": "/crowdfunding",
+        "categories": [
+          "shopping"
+        ],
+        "example": "/mi/crowdfunding",
+        "name": "众筹",
+        "maintainers": [
+          "DIYgod",
+          "nuomi1"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "m.mi.com/crowdfunding/home"
+            ],
+            "target": "/crowdfunding"
+          }
+        ],
+        "view": 5,
+        "location": "crowdfunding.ts",
+        "module": "() => import('@/routes/mi/crowdfunding.ts')"
+      },
+      "/newproducts": {
+        "path": "/newproducts",
+        "categories": [
+          "shopping"
+        ],
+        "example": "/mi/newproducts",
+        "name": "上新",
+        "maintainers": [
+          "nuomi1"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "view": 5,
+        "location": "newproducts.ts",
+        "module": "() => import('@/routes/mi/newproducts.ts')"
+      }
+    },
+    "apiRoutes": {},
+    "name": "小米",
+    "url": "mi.com",
+    "lang": "zh-CN"
+  },
   "mixcloud": {
     "routes": {
       "/:username/:type?": {
@@ -15536,6 +15612,47 @@
     ],
     "lang": "en"
   },
+  "instagram": {
+    "routes": {
+      "/:category/:key": {
+        "path": "/:category/:key",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/instagram/user/stefaniejoosten",
+        "parameters": {
+          "category": "Feed category, see table below",
+          "key": "Username / Hashtag name"
+        },
+        "features": {
+          "requireConfig": [
+            {
+              "name": "INSTAGRAM_COOKIE",
+              "optional": true,
+              "description": "Instagram cookie, only `sessionid` and `ds_user_id` are required."
+            }
+          ],
+          "requirePuppeteer": false,
+          "antiCrawler": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "User",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "description": "| User Posts | Current stories | Highlighted stories | Hashtag |\n| ---------- | --------------- | ------------------- | ------- |\n| user       | stories         | highlights          | tags    |\n\nStories, highlights and hashtags require a cookie.",
+        "location": "index.ts",
+        "module": "() => import('@/routes/instagram/index.ts')"
+      }
+    },
+    "apiRoutes": {},
+    "name": "Instagram",
+    "url": "www.instagram.com",
+    "description": "::: tip\nIt's highly recommended to deploy with Redis cache enabled.\n:::",
+    "lang": "en"
+  },
   "iwara": {
     "routes": {
       "/users/:username/:type?": {
@@ -16743,82 +16860,6 @@
     "zh-TW": {
       "name": "美露可利"
     }
-  },
-  "mi": {
-    "routes": {
-      "/golden": {
-        "path": "/golden",
-        "categories": [
-          "program-update"
-        ],
-        "example": "/mi/golden",
-        "name": "小米应用商店金米奖",
-        "maintainers": [
-          "nczitzk"
-        ],
-        "location": "golden.ts",
-        "module": "() => import('@/routes/mi/golden.ts')"
-      },
-      "/crowdfunding": {
-        "path": "/crowdfunding",
-        "categories": [
-          "shopping"
-        ],
-        "example": "/mi/crowdfunding",
-        "name": "众筹",
-        "maintainers": [
-          "DIYgod",
-          "nuomi1"
-        ],
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportRadar": true,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "m.mi.com/crowdfunding/home"
-            ],
-            "target": "/crowdfunding"
-          }
-        ],
-        "view": 5,
-        "location": "crowdfunding.ts",
-        "module": "() => import('@/routes/mi/crowdfunding.ts')"
-      },
-      "/newproducts": {
-        "path": "/newproducts",
-        "categories": [
-          "shopping"
-        ],
-        "example": "/mi/newproducts",
-        "name": "上新",
-        "maintainers": [
-          "nuomi1"
-        ],
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportRadar": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "view": 5,
-        "location": "newproducts.ts",
-        "module": "() => import('@/routes/mi/newproducts.ts')"
-      }
-    },
-    "apiRoutes": {},
-    "name": "小米",
-    "url": "mi.com",
-    "lang": "zh-CN"
   },
   "missevan": {
     "routes": {
@@ -43032,6 +43073,52 @@
         "view": 0,
         "location": "district.ts",
         "module": "() => import('@/routes/ce/district.ts')"
+      },
+      "/paper/:page?": {
+        "path": "/paper/:page?",
+        "categories": [
+          "traditional-media"
+        ],
+        "example": "/ce/paper",
+        "parameters": {
+          "page": "版面编号，如 `01`；使用 `all` 或留空获取全部版面"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "paper.ce.cn",
+              "paper.ce.cn/index.html",
+              "paper.ce.cn/pc/layout",
+              "paper.ce.cn/pc/layout/index.html",
+              "paper.ce.cn/pad/layout",
+              "paper.ce.cn/pad/layout/index.html"
+            ],
+            "target": "/paper"
+          },
+          {
+            "source": [
+              "paper.ce.cn/pc/layout/:yearMonth/:day/node_:page.html",
+              "paper.ce.cn/pad/layout/:yearMonth/:day/node_:page.html"
+            ],
+            "target": "/paper/:page"
+          }
+        ],
+        "name": "电子版",
+        "maintainers": [
+          "zhangsan-xyz"
+        ],
+        "url": "paper.ce.cn/pc/layout/index.html",
+        "description": "获取当日《经济日报》电子版的全部文章或指定版面文章。",
+        "location": "paper.ts",
+        "module": "() => import('@/routes/ce/paper.ts')"
       }
     },
     "apiRoutes": {},
@@ -104137,14 +104224,15 @@
         "location": "index.ts",
         "module": "() => import('@/routes/qstheory/index.ts')"
       },
-      "/magazine/:magazine": {
-        "path": "/magazine/:magazine",
+      "/magazine/:magazine/:issue?": {
+        "path": "/magazine/:magazine/:issue?",
         "categories": [
           "traditional-media"
         ],
         "example": "/qstheory/magazine/qs",
         "parameters": {
-          "magazine": "刊物，`qs` 为求是，`hqwglist` 为红旗文稿"
+          "magazine": "刊物，`qs` 为求是，`hqwglist` 为红旗文稿",
+          "issue": "期数编号，如 `21` 或 `2026-21`；留空或 `latest` 获取最新一期"
         },
         "radar": [
           {
@@ -104156,7 +104244,8 @@
         "name": "在线读刊",
         "maintainers": [
           "TonyRL",
-          "cscnk52"
+          "cscnk52",
+          "zhangsan-xyz"
         ],
         "location": "magazine.ts",
         "module": "() => import('@/routes/qstheory/magazine.ts')"
@@ -129256,7 +129345,7 @@
         },
         "features": {
           "requireConfig": false,
-          "requirePuppeteer": false,
+          "requirePuppeteer": true,
           "antiCrawler": true,
           "supportBT": false,
           "supportPodcast": false,
@@ -154086,47 +154175,6 @@
     "name": "南方周末",
     "url": "www.infzm.com",
     "lang": "zh-CN"
-  },
-  "instagram": {
-    "routes": {
-      "/:category/:key": {
-        "path": "/:category/:key",
-        "categories": [
-          "social-media"
-        ],
-        "example": "/instagram/user/stefaniejoosten",
-        "parameters": {
-          "category": "Feed category, see table below",
-          "key": "Username / Hashtag name"
-        },
-        "features": {
-          "requireConfig": [
-            {
-              "name": "INSTAGRAM_COOKIE",
-              "optional": true,
-              "description": "Instagram cookie, only `sessionid` and `ds_user_id` are required."
-            }
-          ],
-          "requirePuppeteer": false,
-          "antiCrawler": true,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "name": "User",
-        "maintainers": [
-          "TonyRL"
-        ],
-        "description": "| User Posts | Current stories | Highlighted stories | Hashtag |\n| ---------- | --------------- | ------------------- | ------- |\n| user       | stories         | highlights          | tags    |\n\nStories, highlights and hashtags require a cookie.",
-        "location": "index.ts",
-        "module": "() => import('@/routes/instagram/index.ts')"
-      }
-    },
-    "apiRoutes": {},
-    "name": "Instagram",
-    "url": "www.instagram.com",
-    "description": "::: tip\nIt's highly recommended to deploy with Redis cache enabled.\n:::",
-    "lang": "en"
   },
   "iplaysoft": {
     "routes": {
