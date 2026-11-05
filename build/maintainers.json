@@ -980,6 +980,9 @@
   "/zyw/hot/:site?": [
     "nczitzk"
   ],
+  "/4chan/:board/thread/:threadId/:routeParams?": [
+    "Hash6232"
+  ],
   "/4chan/:board/catalog/:routeParams?": [
     "heisenshark"
   ],
@@ -2038,6 +2041,15 @@
   ],
   "/utgd/topic/:topic?": [
     "nczitzk"
+  ],
+  "/viva-la-vita/featured": [
+    "0zheermao0"
+  ],
+  "/viva-la-vita/hot": [
+    "0zheermao0"
+  ],
+  "/viva-la-vita/latest": [
+    "0zheermao0"
   ],
   "/wellcee/rent/:city/:district?": [
     "TonyRL"
@@ -4625,6 +4637,9 @@
   "/gmcmonline/chinacustoms": [
     "nczitzk"
   ],
+  "/gmrb/paper/:page?": [
+    "zhangsan-xyz"
+  ],
   "/gmu/news/:type?": [
     "FrankFahey"
   ],
@@ -6540,6 +6555,12 @@
   "/nuist/yjs/:path{.+}?": [
     "gylidian",
     "nczitzk"
+  ],
+  "/nvidia/developer/:language?": [
+    "ljh12138164"
+  ],
+  "/nvidia/newsroom": [
+    "ljh12138164"
   ],
   "/nwafu/:type?": [
     "karinido"
@@ -9718,6 +9739,12 @@
   ],
   "/aljazeera/:language?/tag/:id": [
     "nczitzk"
+  ],
+  "/amd/newsroom/:category?/:language?": [
+    "ljh12138164"
+  ],
+  "/amd/press-releases/:language?": [
+    "ljh12138164"
   ],
   "/apnews/sitemap/:route": [
     "zoenglinghou",

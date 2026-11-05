@@ -3119,6 +3119,15 @@
     "_name": "4chan",
     "boards": [
       {
+        "title": "Thread",
+        "docs": "https://docs.rsshub.app/routes/4chan",
+        "source": [
+          "/:board/thread/:threadId",
+          "/:board/thread/:threadId/*"
+        ],
+        "target": "/4chan/:board/thread/:threadId/:routeParams?"
+      },
+      {
         "title": "Board's catalog",
         "docs": "https://docs.rsshub.app/routes/4chan",
         "source": [
@@ -6572,6 +6581,39 @@
           "/"
         ],
         "target": "/utgd/topic"
+      }
+    ]
+  },
+  "viva-la-vita.org": {
+    "_name": "生如夏花论坛",
+    "bbs": [
+      {
+        "title": "精华帖子",
+        "docs": "https://docs.rsshub.app/routes/viva-la-vita",
+        "source": [
+          "/",
+          "/all"
+        ],
+        "target": "/viva-la-vita/featured"
+      },
+      {
+        "title": "热门帖子",
+        "docs": "https://docs.rsshub.app/routes/viva-la-vita",
+        "source": [
+          "/",
+          "/all"
+        ],
+        "target": "/viva-la-vita/hot"
+      },
+      {
+        "title": "最新帖子",
+        "docs": "https://docs.rsshub.app/routes/viva-la-vita",
+        "source": [
+          "/",
+          "/all",
+          "/d/:id"
+        ],
+        "target": "/viva-la-vita/latest"
       }
     ]
   },
@@ -23219,6 +23261,29 @@
       }
     ]
   },
+  "gmw.cn": {
+    "_name": "光明日报",
+    "epaper": [
+      {
+        "title": "电子版",
+        "docs": "https://docs.rsshub.app/routes/gmrb",
+        "source": [
+          "/gmrb",
+          "/gmrb/html/layout/index.html",
+          "/gmrb/paperindex.htm"
+        ],
+        "target": "/gmrb/paper"
+      },
+      {
+        "title": "电子版",
+        "docs": "https://docs.rsshub.app/routes/gmrb",
+        "source": [
+          "/gmrb/html/layout/:yearMonth/:day/node_:page.html"
+        ],
+        "target": "/gmrb/paper/:page"
+      }
+    ]
+  },
   "gmu.cn": {
     "_name": "赣南医科大学",
     ".": [
@@ -37629,6 +37694,54 @@
           "/419/list.htm"
         ],
         "target": "/nuist/xgc"
+      }
+    ]
+  },
+  "nvidia.com": {
+    "_name": "NVIDIA",
+    "developer": [
+      {
+        "title": "Technical Blog",
+        "docs": "https://docs.rsshub.app/routes/nvidia",
+        "source": [
+          "/blog",
+          "/blog/:slug"
+        ],
+        "target": "/nvidia/developer/en"
+      },
+      {
+        "title": "Technical Blog",
+        "docs": "https://docs.rsshub.app/routes/nvidia",
+        "source": [
+          "/zh-cn/blog",
+          "/zh-cn/blog/:slug"
+        ],
+        "target": "/nvidia/developer/zh-CN"
+      }
+    ],
+    "nvidianews": [
+      {
+        "title": "Newsroom",
+        "docs": "https://docs.rsshub.app/routes/nvidia",
+        "source": [
+          "/",
+          "/news/:slug"
+        ],
+        "target": "/nvidia/newsroom"
+      }
+    ]
+  },
+  "nvidia.cn": {
+    "_name": "NVIDIA",
+    "developer": [
+      {
+        "title": "Technical Blog",
+        "docs": "https://docs.rsshub.app/routes/nvidia",
+        "source": [
+          "/blog",
+          "/blog/:slug"
+        ],
+        "target": "/nvidia/developer/zh-CN"
       }
     ]
   },
@@ -52376,6 +52489,57 @@
           "/"
         ],
         "target": "/aljazeera/chinese/tag/:id"
+      }
+    ]
+  },
+  "amd.com": {
+    "_name": "AMD",
+    "newsroom": [
+      {
+        "title": "Newsroom",
+        "docs": "https://docs.rsshub.app/routes/amd",
+        "source": [
+          "/",
+          "/news/:slug"
+        ],
+        "target": "/amd/newsroom"
+      },
+      {
+        "title": "Newsroom",
+        "docs": "https://docs.rsshub.app/routes/amd",
+        "source": [
+          "/category/:category"
+        ],
+        "target": "/amd/newsroom/:category"
+      }
+    ],
+    "www": [
+      {
+        "title": "Newsroom",
+        "docs": "https://docs.rsshub.app/routes/amd",
+        "source": [
+          "/zh-cn/newsroom.html"
+        ],
+        "target": "/amd/newsroom/all/zh-CN"
+      },
+      {
+        "title": "Press Releases",
+        "docs": "https://docs.rsshub.app/routes/amd",
+        "source": [
+          "/zh-cn/newsroom/press-releases/:slug"
+        ],
+        "target": "/amd/press-releases/zh-CN"
+      }
+    ],
+    "ir": [
+      {
+        "title": "Press Releases",
+        "docs": "https://docs.rsshub.app/routes/amd",
+        "source": [
+          "/news-events/press-releases",
+          "/news-events/press-releases/detail/:id/:slug"
+        ],
+        "target": "/amd/press-releases/en"
       }
     ]
   },

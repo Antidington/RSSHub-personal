@@ -11619,6 +11619,40 @@ export default {
   },
   "4chan": {
     "routes": {
+      "/:board/thread/:threadId/:routeParams?": {
+        "path": "/:board/thread/:threadId/:routeParams?",
+        "categories": [
+          "bbs"
+        ],
+        "example": "/4chan/g/thread/105076684",
+        "parameters": {
+          "board": "4chan board",
+          "threadId": "Thread ID, the number in the thread URL",
+          "routeParams": "extra parameters, see the table above"
+        },
+        "features": {
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "Thread",
+        "maintainers": [
+          "Hash6232"
+        ],
+        "radar": [
+          {
+            "source": [
+              "boards.4chan.org/:board/thread/:threadId",
+              "boards.4chan.org/:board/thread/:threadId/*"
+            ]
+          }
+        ],
+        "description": "Returns one feed item per post in the thread. The original post links to the thread; replies link to `#p<post number>`. The OP's reply count is exposed as `comments` in Atom, and thread state such as sticky, closed, bump limit, image limit, and archived is exposed in the feed description.\n\n| Key              | Description                          | Accepts                | Defaults to |\n| ---------------- | ------------------------------------ | ---------------------- | ----------- |\n| `revealSpoilers` | Don't wrap images tagged as spoilers | `0`/`1`/`true`/`false` | `false`     |",
+        "location": "thread.tsx",
+        "module": () => import('@/routes/4chan/thread.tsx')
+      },
       "/:board/catalog/:routeParams?": {
         "path": "/:board/catalog/:routeParams?",
         "categories": [
@@ -11648,7 +11682,7 @@ export default {
             "target": "/:board/catalog"
           }
         ],
-        "description": "Specify options (in the format of query string) in parameter `routeParams` to control extra features for threads\n\n| Key               | Description                                      | Accepts                | Defaults to |\n| ----------------- | ------------------------------------------------ | ---------------------- | ----------- |\n| `showReplyCount`  | Show number of replies of each thread in catalog | `0`/`1`/`true`/`false` | `false`     |\n| `showLastReplies` | Show last 5 replies of each thread               | `0`/`1`/`true`/`false` | `false`     |\n| `revealSpoilers`  | Don't wrap images tagged as spoilers             | `0`/`1`/`true`/`false` | `false`     |\n| `excludeSticky`   | Filter out sticky threads                        | `0`/`1`/`true`/`false` | `false`     |\n| `minReplies`      | Minimum replies per thread                       | Integer                | None        |\n| `maxReplies`      | Maximum replies per thread                       | Integer                | None        |",
+        "description": "Specify options (in the format of query string) in parameter `routeParams` to control extra features for threads\n\n| Key               | Description                                      | Accepts                | Defaults to |\n| ----------------- | ------------------------------------------------ | ---------------------- | ----------- |\n| `showReplyCount`  | Show number of replies of each thread in catalog | `0`/`1`/`true`/`false` | `false`     |\n| `showLastReplies` | Show last 5 replies of each thread               | `0`/`1`/`true`/`false` | `false`     |\n| `showThreadFeed`  | Add a per-thread feed link to each item          | `0`/`1`/`true`/`false` | `false`     |\n| `revealSpoilers`  | Don't wrap images tagged as spoilers             | `0`/`1`/`true`/`false` | `false`     |\n| `excludeSticky`   | Filter out sticky threads                        | `0`/`1`/`true`/`false` | `false`     |\n| `minReplies`      | Minimum replies per thread                       | Integer                | None        |\n| `maxReplies`      | Maximum replies per thread                       | Integer                | None        |",
         "location": "catalog.tsx",
         "module": () => import('@/routes/4chan/catalog.tsx')
       }
@@ -24492,6 +24526,105 @@ export default {
     "apiRoutes": {},
     "name": "UNTAG",
     "url": "utgd.net",
+    "lang": "zh-CN"
+  },
+  "viva-la-vita": {
+    "routes": {
+      "/featured": {
+        "path": "/featured",
+        "name": "精华帖子",
+        "categories": [
+          "bbs"
+        ],
+        "example": "/viva-la-vita/featured",
+        "maintainers": [
+          "0zheermao0"
+        ],
+        "description": "对应论坛“精华”，仅返回加精主题，按加精日期倒序排列，不是置顶主题。读取榜单前 20 个主题，跳过首帖不可见的主题，包含首帖正文及最新 5 条公开评论（新到旧，不含首帖及系统事件）。评论缓存 5 分钟，无需登录。主题链接、GUID 和发布时间在各路由中保持一致，不因排名、加精、编辑或回复而生成新条目；新增评论只更新原条目内容。是否重新通知以及跨订阅去重取决于阅读器。",
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "nsfw": true
+        },
+        "radar": [
+          {
+            "source": [
+              "bbs.viva-la-vita.org/",
+              "bbs.viva-la-vita.org/all"
+            ],
+            "target": "/featured"
+          }
+        ],
+        "location": "featured.ts",
+        "module": () => import('@/routes/viva-la-vita/featured.ts')
+      },
+      "/hot": {
+        "path": "/hot",
+        "name": "热门帖子",
+        "categories": [
+          "bbs"
+        ],
+        "example": "/viva-la-vita/hot",
+        "maintainers": [
+          "0zheermao0"
+        ],
+        "description": "对应论坛“热门”，按评论总数倒序排列，为全站累计热门榜，不是近期热度榜。读取榜单前 20 个主题，跳过首帖不可见的主题，包含首帖正文及最新 5 条公开评论（新到旧，不含首帖及系统事件）。评论缓存 5 分钟，无需登录。主题链接、GUID 和发布时间在各路由中保持一致，不因排名、加精、编辑或回复而生成新条目；新增评论只更新原条目内容。是否重新通知以及跨订阅去重取决于阅读器。",
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "nsfw": true
+        },
+        "radar": [
+          {
+            "source": [
+              "bbs.viva-la-vita.org/",
+              "bbs.viva-la-vita.org/all"
+            ],
+            "target": "/hot"
+          }
+        ],
+        "location": "hot.ts",
+        "module": () => import('@/routes/viva-la-vita/hot.ts')
+      },
+      "/latest": {
+        "path": "/latest",
+        "name": "最新帖子",
+        "categories": [
+          "bbs"
+        ],
+        "example": "/viva-la-vita/latest",
+        "maintainers": [
+          "0zheermao0"
+        ],
+        "description": "按主题创建时间倒序排列。读取榜单前 20 个主题，跳过首帖不可见的主题，包含首帖正文及最新 5 条公开评论（新到旧，不含首帖及系统事件）。评论缓存 5 分钟，无需登录。主题链接、GUID 和发布时间在各路由中保持一致，不因排名、加精、编辑或回复而生成新条目；新增评论只更新原条目内容。是否重新通知以及跨订阅去重取决于阅读器。",
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "nsfw": true
+        },
+        "radar": [
+          {
+            "source": [
+              "bbs.viva-la-vita.org/",
+              "bbs.viva-la-vita.org/all",
+              "bbs.viva-la-vita.org/d/:id"
+            ],
+            "target": "/latest"
+          }
+        ],
+        "location": "latest.ts",
+        "module": () => import('@/routes/viva-la-vita/latest.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "生如夏花论坛",
+    "url": "bbs.viva-la-vita.org",
     "lang": "zh-CN"
   },
   "wellcee": {
@@ -63648,6 +63781,59 @@ export default {
     "description": "",
     "lang": "zh-CN"
   },
+  "gmrb": {
+    "routes": {
+      "/paper/:page?": {
+        "path": "/paper/:page?",
+        "categories": [
+          "traditional-media"
+        ],
+        "example": "/gmrb/paper",
+        "parameters": {
+          "page": "版面编号，如 `01`；使用 `all` 或留空获取全部版面"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "epaper.gmw.cn/gmrb",
+              "epaper.gmw.cn/gmrb/html/layout/index.html",
+              "epaper.gmw.cn/gmrb/paperindex.htm"
+            ],
+            "target": "/paper"
+          },
+          {
+            "source": [
+              "epaper.gmw.cn/gmrb/html/layout/:yearMonth/:day/node_:page.html"
+            ],
+            "target": "/paper/:page"
+          }
+        ],
+        "name": "电子版",
+        "maintainers": [
+          "zhangsan-xyz"
+        ],
+        "url": "epaper.gmw.cn/gmrb/html/layout/index.html",
+        "description": "获取当日《光明日报》电子版的全部文章或指定版面文章。",
+        "location": "paper.ts",
+        "module": () => import('@/routes/gmrb/paper.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "光明日报",
+    "url": "epaper.gmw.cn/gmrb",
+    "categories": [
+      "traditional-media"
+    ],
+    "lang": "zh-CN"
+  },
   "gmu": {
     "routes": {
       "/news/:type?": {
@@ -94382,6 +94568,124 @@ export default {
     "url": "bulletin.nuist.edu.cn",
     "description": "::: tip\n路由地址全部按照 **学校官网域名和栏目编号** 设计\n\n使用方法：\n\n以[南信大信息公告栏](https://bulletin.nuist.edu.cn)为例，点开任意一个栏目\n\n获得 URL 中的**分域名**和**栏目编号（可选）**：https\\://`bulletin`.nuist.edu.cn/`791`/list.htm\n\n将其替换到 RSS 路由地址中即可：\n\n[https://rsshub.app/**nuist**/`bulletin`](https://rsshub.app/nuist/bulletin) 或 [https://rsshub.app/**nuist**/`bulletin`/`791`](https://rsshub.app/nuist/bulletin)\n:::",
     "lang": "zh-CN"
+  },
+  "nvidia": {
+    "routes": {
+      "/developer/:language?": {
+        "path": "/developer/:language?",
+        "name": "Technical Blog",
+        "url": "developer.nvidia.com/blog",
+        "example": "/nvidia/developer",
+        "categories": [
+          "programming"
+        ],
+        "maintainers": [
+          "ljh12138164"
+        ],
+        "parameters": {
+          "language": {
+            "description": "Blog language",
+            "default": "en",
+            "options": [
+              {
+                "value": "en",
+                "label": "English"
+              },
+              {
+                "value": "zh-CN",
+                "label": "Simplified Chinese"
+              }
+            ]
+          }
+        },
+        "description": "Full technical articles from the official WordPress API, including images, code blocks, and tables. The official feeds only contain excerpts.",
+        "zh": {
+          "name": "技术博客",
+          "parameters": {
+            "language": {
+              "description": "文章语言。中英文站分别维护，文章列表和发布时间可能不同",
+              "default": "en",
+              "options": [
+                {
+                  "value": "en",
+                  "label": "英语"
+                },
+                {
+                  "value": "zh-CN",
+                  "label": "简体中文"
+                }
+              ]
+            }
+          },
+          "description": "官方 Feed 只提供摘要。本路由通过官方 WordPress API 获取全文，保留图片、代码块和表格。使用 `/nvidia/developer/zh-CN` 订阅简体中文，或使用 `/nvidia/developer/en` 订阅英文。"
+        },
+        "radar": [
+          {
+            "source": [
+              "developer.nvidia.com/blog",
+              "developer.nvidia.com/blog/:slug"
+            ],
+            "target": "/developer/en"
+          },
+          {
+            "source": [
+              "developer.nvidia.cn/blog",
+              "developer.nvidia.cn/blog/:slug"
+            ],
+            "target": "/developer/zh-CN"
+          },
+          {
+            "source": [
+              "developer.nvidia.com/zh-cn/blog",
+              "developer.nvidia.com/zh-cn/blog/:slug"
+            ],
+            "target": "/developer/zh-CN"
+          }
+        ],
+        "features": {
+          "requirePuppeteer": false,
+          "supportRadar": true
+        },
+        "location": "developer.ts",
+        "module": () => import('@/routes/nvidia/developer.ts')
+      },
+      "/newsroom": {
+        "path": "/newsroom",
+        "name": "Newsroom",
+        "url": "nvidianews.nvidia.com",
+        "example": "/nvidia/newsroom",
+        "categories": [
+          "new-media"
+        ],
+        "maintainers": [
+          "ljh12138164"
+        ],
+        "description": "Full articles from the English newsroom feed, covering press releases and selected NVIDIA Blog posts. Expands blog excerpts into complete articles.",
+        "zh": {
+          "name": "新闻中心",
+          "description": "订阅英文新闻中心的新闻稿和部分企业博客文章，并补全其中只有摘要的正文。"
+        },
+        "radar": [
+          {
+            "source": [
+              "nvidianews.nvidia.com",
+              "nvidianews.nvidia.com/news/:slug"
+            ],
+            "target": "/newsroom"
+          }
+        ],
+        "features": {
+          "requirePuppeteer": false,
+          "supportRadar": true
+        },
+        "location": "newsroom.ts",
+        "module": () => import('@/routes/nvidia/newsroom.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "NVIDIA",
+    "url": "nvidia.com",
+    "lang": "en"
   },
   "nwafu": {
     "routes": {
@@ -135071,6 +135375,162 @@ export default {
     "apiRoutes": {},
     "name": "Aljazeera",
     "url": "aljazeera.com",
+    "lang": "en"
+  },
+  "amd": {
+    "routes": {
+      "/newsroom/:category?/:language?": {
+        "path": "/newsroom/:category?/:language?",
+        "name": "Newsroom",
+        "url": "newsroom.amd.com",
+        "example": "/amd/newsroom",
+        "categories": [
+          "new-media"
+        ],
+        "maintainers": [
+          "ljh12138164"
+        ],
+        "parameters": {
+          "category": "Official category slug such as gaming, ai, or data-center. Omit or use all for all news. Chinese supports all only.",
+          "language": {
+            "description": "Article language. Chinese uses the latest news and blogs on the regional homepage.",
+            "default": "en",
+            "options": [
+              {
+                "value": "en",
+                "label": "English"
+              },
+              {
+                "value": "zh-CN",
+                "label": "Simplified Chinese"
+              }
+            ]
+          }
+        },
+        "description": "Use `/amd/newsroom/all/zh-CN` for the Chinese homepage news and blogs. Fetches complete articles and footnotes using the official RSS feed for discovery. For Radeon and gaming news, use `/amd/newsroom/gaming`.",
+        "zh": {
+          "name": "新闻中心",
+          "parameters": {
+            "category": "官网分类，如 gaming（游戏与显卡）、ai（人工智能）或 data-center（数据中心）。留空或填 all 订阅全部新闻；中文站仅支持 all",
+            "language": {
+              "description": "文章语言。中英文站的文章列表和发布时间可能不同",
+              "default": "en",
+              "options": [
+                {
+                  "value": "en",
+                  "label": "英语"
+                },
+                {
+                  "value": "zh-CN",
+                  "label": "简体中文"
+                }
+              ]
+            }
+          },
+          "description": "获取文章的完整正文和脚注。英文文章列表来自官方 RSS，使用 `/amd/newsroom/all/en` 订阅；Radeon 显卡和游戏资讯可使用 `/amd/newsroom/gaming`。中文内容来自地区官网首页的最新新闻和博客，使用 `/amd/newsroom/all/zh-CN` 订阅。中文站不支持按分类订阅。"
+        },
+        "radar": [
+          {
+            "source": [
+              "newsroom.amd.com",
+              "newsroom.amd.com/news/:slug"
+            ],
+            "target": "/newsroom"
+          },
+          {
+            "source": [
+              "newsroom.amd.com/category/:category"
+            ],
+            "target": "/newsroom/:category"
+          },
+          {
+            "source": [
+              "www.amd.com/zh-cn/newsroom.html"
+            ],
+            "target": "/newsroom/all/zh-CN"
+          }
+        ],
+        "features": {
+          "requirePuppeteer": false,
+          "supportRadar": true
+        },
+        "location": "newsroom.ts",
+        "module": () => import('@/routes/amd/newsroom.ts')
+      },
+      "/press-releases/:language?": {
+        "path": "/press-releases/:language?",
+        "name": "Press Releases",
+        "url": "ir.amd.com/news-events/press-releases",
+        "example": "/amd/press-releases",
+        "categories": [
+          "finance"
+        ],
+        "maintainers": [
+          "ljh12138164"
+        ],
+        "parameters": {
+          "language": {
+            "description": "Article language. English uses the investor relations feed; Chinese uses the regional newsroom homepage. Lists and publication dates differ.",
+            "default": "en",
+            "options": [
+              {
+                "value": "en",
+                "label": "English"
+              },
+              {
+                "value": "zh-CN",
+                "label": "Simplified Chinese"
+              }
+            ]
+          }
+        },
+        "description": "Use `/amd/press-releases/zh-CN` for Chinese press releases. Full press releases from the investor relations website. The official RSS feed provides titles and links without article bodies.",
+        "zh": {
+          "name": "新闻稿",
+          "parameters": {
+            "language": {
+              "description": "文章语言。中英文新闻稿的来源、文章列表和发布时间不同",
+              "default": "en",
+              "options": [
+                {
+                  "value": "en",
+                  "label": "英语"
+                },
+                {
+                  "value": "zh-CN",
+                  "label": "简体中文"
+                }
+              ]
+            }
+          },
+          "description": "英文新闻稿来自投资者关系网站，官方 RSS 只有标题和链接，本路由会补全正文。使用 `/amd/press-releases/en` 订阅英文，或使用 `/amd/press-releases/zh-CN` 订阅地区新闻中心首页的中文新闻稿。"
+        },
+        "radar": [
+          {
+            "source": [
+              "ir.amd.com/news-events/press-releases",
+              "ir.amd.com/news-events/press-releases/detail/:id/:slug"
+            ],
+            "target": "/press-releases/en"
+          },
+          {
+            "source": [
+              "www.amd.com/zh-cn/newsroom/press-releases/:slug"
+            ],
+            "target": "/press-releases/zh-CN"
+          }
+        ],
+        "features": {
+          "requirePuppeteer": false,
+          "supportRadar": true
+        },
+        "location": "press-releases.ts",
+        "module": () => import('@/routes/amd/press-releases.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "AMD",
+    "url": "amd.com",
     "lang": "en"
   },
   "apnews": {
