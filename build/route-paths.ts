@@ -92,6 +92,7 @@ export type RoutePath =
   | `/7gogo/user/:username`
   | `/7mmtv/:language?/:category?/:type?`
   | `/81/81rc/:category{.+}?`
+  | `/81/jfjb/:page?`
   | `/8264/list/:id?`
   | `/8kcos/`
   | `/8kcos/cat/:cat?`
@@ -2040,6 +2041,7 @@ export type RoutePath =
   | `/keep/user/:id`
   | `/keepass/`
   | `/keio/ridership`
+  | `/keke.app/:category?`
   | `/kelownacapnews/:type`
   | `/kemono/:source?/:id?/:type?`
   | `/kemono/:source/:id/dms`

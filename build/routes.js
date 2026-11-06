@@ -36,6 +36,48 @@ export default {
         ],
         "location": "81rc/index.ts",
         "module": () => import('@/routes/81/81rc/index.ts')
+      },
+      "/jfjb/:page?": {
+        "path": "/jfjb/:page?",
+        "categories": [
+          "traditional-media"
+        ],
+        "example": "/81/jfjb",
+        "parameters": {
+          "page": "版面编号，如 `01`、`1`、`01版` 或 `第1版`；使用 `all` 或留空获取全部版面"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.81.cn/szb_223187/szblb/index.html",
+              "www.81.cn/szb_223187/szblb",
+              "www.81.cn/szb_223187/szbxq/index.html",
+              "www.81.cn/szb_223187/szbxq",
+              "81.cn/szb_223187/szblb/index.html",
+              "81.cn/szb_223187/szblb",
+              "81.cn/szb_223187/szbxq/index.html",
+              "81.cn/szb_223187/szbxq"
+            ],
+            "target": "/jfjb"
+          }
+        ],
+        "name": "解放军报",
+        "maintainers": [
+          "zhangsan-xyz"
+        ],
+        "url": "www.81.cn/szb_223187/szblb/index.html",
+        "description": "获取当日《解放军报》数字报（电子版）的全部文章或指定版面文章。如订阅 **01 版**，路由为 `/81/jfjb/01`（亦支持 `/81/jfjb/第1版`）。如需按栏目过滤（如 **军营观察**），可使用通用参数 `/81/jfjb?filter_category=军营观察`。",
+        "location": "jfjb/index.ts",
+        "module": () => import('@/routes/81/jfjb/index.ts')
       }
     },
     "apiRoutes": {},
@@ -44,7 +86,7 @@ export default {
     "categories": [
       "government"
     ],
-    "description": "",
+    "description": "中国军网是中央军委批准的中国人民解放军唯一新闻门户网站。",
     "lang": "zh-CN"
   },
   "121": {
@@ -47725,7 +47767,7 @@ export default {
         ],
         "example": "/cntheory/paper",
         "parameters": {
-          "id": "板块，默认为全部"
+          "id": "版块或版面编号，默认为全部，如 `国内大局` 或 `01`；使用 `all` 或留空获取全部版面"
         },
         "features": {
           "requireConfig": false,
@@ -47735,18 +47777,35 @@ export default {
           "supportPodcast": false,
           "supportScihub": false
         },
+        "radar": [
+          {
+            "source": [
+              "paper.studytimes.cn",
+              "paper.studytimes.cn/cntheory"
+            ],
+            "target": "/paper"
+          },
+          {
+            "source": [
+              "paper.studytimes.cn/cntheory/:yearMonth/:day/node_:id.html"
+            ],
+            "target": "/paper/:id"
+          }
+        ],
         "name": "学习时报",
         "maintainers": [
-          "nczitzk"
+          "nczitzk",
+          "zhangsan-xyz"
         ],
-        "description": "如订阅 **第 A1 版：国内大局**，路由为 [`/cntheory/paper/国内大局`](https://rsshub.app/cntheory/paper/国内大局)。",
-        "location": "paper.tsx",
-        "module": () => import('@/routes/cntheory/paper.tsx')
+        "url": "paper.studytimes.cn/cntheory",
+        "description": "获取当日《学习时报》数字报的全部文章或指定版面文章。如订阅 **01 版：国内大局**，路由为 `/cntheory/paper/国内大局` 或 `/cntheory/paper/01`。",
+        "location": "paper.ts",
+        "module": () => import('@/routes/cntheory/paper.ts')
       }
     },
     "apiRoutes": {},
     "name": "理论网",
-    "url": "paper.cntheory.com",
+    "url": "paper.studytimes.cn",
     "lang": "zh-CN"
   },
   "cnu": {
@@ -79254,6 +79313,102 @@ export default {
     "ja": {
       "name": "京王電鉄"
     }
+  },
+  "keke.app": {
+    "routes": {
+      "/:category?": {
+        "path": "/:category?",
+        "categories": [
+          "multimedia"
+        ],
+        "example": "/keke.app/latest",
+        "parameters": {
+          "category": {
+            "description": "分类，默认为 `latest`",
+            "default": "latest",
+            "options": [
+              {
+                "value": "latest",
+                "label": "最近更新"
+              },
+              {
+                "value": "movie",
+                "label": "电影"
+              },
+              {
+                "value": "series",
+                "label": "连续剧"
+              },
+              {
+                "value": "anime",
+                "label": "动漫"
+              },
+              {
+                "value": "variety",
+                "label": "综艺纪录"
+              },
+              {
+                "value": "short",
+                "label": "短剧"
+              },
+              {
+                "value": "hot-movie",
+                "label": "近期热门电影"
+              },
+              {
+                "value": "hot-series",
+                "label": "近期热门剧集"
+              },
+              {
+                "value": "hot-jpkr",
+                "label": "近期热门日韩剧"
+              },
+              {
+                "value": "hot-western",
+                "label": "近期热门欧美剧"
+              },
+              {
+                "value": "hot-hktw",
+                "label": "近期热门港台剧"
+              },
+              {
+                "value": "hot-cn",
+                "label": "近期热播国产剧"
+              },
+              {
+                "value": "hot-anime",
+                "label": "热播动漫"
+              },
+              {
+                "value": "hot-variety",
+                "label": "热播综艺纪录"
+              }
+            ]
+          }
+        },
+        "features": {
+          "antiCrawler": true
+        },
+        "radar": [
+          {
+            "source": [
+              "www.keke1.app/"
+            ],
+            "target": "/latest"
+          }
+        ],
+        "name": "分类",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "location": "index.ts",
+        "module": () => import('@/routes/keke.app/index.ts')
+      }
+    },
+    "apiRoutes": {},
+    "name": "可可影视",
+    "url": "www.keke1.app",
+    "lang": "zh-CN"
   },
   "kelownacapnews": {
     "routes": {

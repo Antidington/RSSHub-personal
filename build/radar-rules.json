@@ -11,6 +11,23 @@
         ],
         "target": "/81/81rc/:category?"
       }
+    ],
+    "www": [
+      {
+        "title": "解放军报",
+        "docs": "https://docs.rsshub.app/routes/81",
+        "source": [
+          "/szb_223187/szblb/index.html",
+          "/szb_223187/szblb",
+          "/szb_223187/szbxq/index.html",
+          "/szb_223187/szbxq",
+          "/szb_223187/szblb/index.html",
+          "/szb_223187/szblb",
+          "/szb_223187/szbxq/index.html",
+          "/szb_223187/szbxq"
+        ],
+        "target": "/81/jfjb"
+      }
     ]
   },
   "121.com.cn": {
@@ -17359,6 +17376,28 @@
       }
     ]
   },
+  "studytimes.cn": {
+    "_name": "理论网",
+    "paper": [
+      {
+        "title": "学习时报",
+        "docs": "https://docs.rsshub.app/routes/cntheory",
+        "source": [
+          "/",
+          "/cntheory"
+        ],
+        "target": "/cntheory/paper"
+      },
+      {
+        "title": "学习时报",
+        "docs": "https://docs.rsshub.app/routes/cntheory",
+        "source": [
+          "/cntheory/:yearMonth/:day/node_:id.html"
+        ],
+        "target": "/cntheory/paper/:id"
+      }
+    ]
+  },
   "cnu.edu.cn": {
     "_name": "首都师范大学",
     "iec": [
@@ -30762,6 +30801,19 @@
           "/company/corporate/corporate_manual/number-of-passengers.html"
         ],
         "target": "/keio/ridership"
+      }
+    ]
+  },
+  "keke1.app": {
+    "_name": "可可影视",
+    "www": [
+      {
+        "title": "分类",
+        "docs": "https://docs.rsshub.app/routes/keke.app",
+        "source": [
+          "/"
+        ],
+        "target": "/keke.app/latest"
       }
     ]
   },

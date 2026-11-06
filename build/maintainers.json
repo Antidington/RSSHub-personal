@@ -2,6 +2,9 @@
   "/81/81rc/:category{.+}?": [
     "nczitzk"
   ],
+  "/81/jfjb/:page?": [
+    "zhangsan-xyz"
+  ],
   "/121/weatherLive": [
     "nczitzk"
   ],
@@ -3416,7 +3419,8 @@
     "nczitzk"
   ],
   "/cntheory/paper/:id?": [
-    "nczitzk"
+    "nczitzk",
+    "zhangsan-xyz"
   ],
   "/cnu/iec": [
     "liueic"
@@ -5565,6 +5569,9 @@
   ],
   "/keio/ridership": [
     "pseudoyu"
+  ],
+  "/keke.app/:category?": [
+    "TonyRL"
   ],
   "/kelownacapnews/:type": [
     "hualiong"
