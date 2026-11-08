@@ -1,5 +1,7 @@
+import { raw } from 'hono/html';
 import { renderToString } from 'hono/jsx/dom/server';
 
+import { renderYoutube } from '@/routes/youtube/utils';
 import type { Route } from '@/types';
 import cache from '@/utils/cache';
 import ofetch from '@/utils/ofetch';
@@ -8,7 +10,7 @@ import { parseDate } from '@/utils/parse-date';
 export const route: Route = {
     path: '/user/sheets/:username/:iso?/:freeOnly?',
     categories: ['shopping'],
-    example: '/mymusicsheet/user/sheets/HalcyonMusic/USD',
+    example: '/mymusicsheet/user/sheets/HalcyonMusic/USD/1',
     parameters: {
         username: 'Username, can be found in the URL',
         iso: 'ISO 4217 currency code for displaying prices, defaults to `USD`',
@@ -209,6 +211,7 @@ async function handler(ctx) {
         image: artistInfo.profileUrl,
         link: `https://www.mymusicfive.com/${username}?viewType=sheet&orderBy=createdAt`,
         item: items,
+        allowEmpty: Boolean(freeOnly),
     };
 }
 
@@ -227,7 +230,7 @@ const MymusicSheetDescription = ({
     };
 }) => (
     <div class="item-description">
-        {youtubeId ? <iframe id="ytplayer" type="text/html" width="640" height="360" src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=0`} frameborder="0" allowfullscreen></iframe> : null}
+        {youtubeId ? raw(renderYoutube(true, youtubeId, undefined, undefined)) : null}
         {content.musicName ? <p>Music Name: {content.musicName}</p> : null}
         {content.musicMemo ? <p>Music Memo: {content.musicMemo}</p> : null}
         {content.musicianName ? <p>Musician Name: {content.musicianName}</p> : null}
