@@ -1314,45 +1314,6 @@
     "url": "bandbbs.cn",
     "lang": "zh-CN"
   },
-  "bbcnewslabs": {
-    "routes": {
-      "/news": {
-        "path": "/news",
-        "categories": [
-          "programming"
-        ],
-        "example": "/bbcnewslabs/news",
-        "parameters": {},
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "bbcnewslabs.co.uk/",
-              "www.bbc.co.uk/rdnewslabs/news/"
-            ]
-          }
-        ],
-        "name": "News",
-        "maintainers": [
-          "elxy"
-        ],
-        "url": "www.bbc.co.uk/rdnewslabs/news/",
-        "location": "news.ts",
-        "module": "() => import('@/routes/bbcnewslabs/news.ts')"
-      }
-    },
-    "apiRoutes": {},
-    "name": "BBC News Labs",
-    "url": "www.bbc.co.uk/rdnewslabs",
-    "lang": "en"
-  },
   "bestblogs": {
     "routes": {
       "/feeds/:category?": {
@@ -89918,13 +89879,18 @@
   },
   "ndss-symposium": {
     "routes": {
-      "/ndss": {
-        "path": "/ndss",
+      "/ndss/:abstract?": {
+        "path": "/ndss/:abstract?",
         "categories": [
           "journal"
         ],
         "example": "/ndss-symposium/ndss",
-        "parameters": {},
+        "parameters": {
+          "abstract": {
+            "description": "Set to `1` to fetch abstracts for every accepted paper. The default `0` returns titles and authors only.",
+            "default": "0"
+          }
+        },
         "features": {
           "requireConfig": false,
           "requirePuppeteer": false,
@@ -89942,10 +89908,11 @@
         ],
         "name": "Accepted papers",
         "maintainers": [
-          "ZeddYu"
+          "ZeddYu",
+          "yuguorui"
         ],
         "url": "ndss-symposium.org/",
-        "description": "Accepted papers from the latest symposium and workshop pages.",
+        "description": "Set `abstract` to `1` to include paper abstracts, taken from the detailed program page or, when a paper is missing there, from its own page.",
         "location": "ndss.ts",
         "module": "() => import('@/routes/ndss-symposium/ndss.ts')"
       }
@@ -95605,7 +95572,8 @@
         "example": "/nytimes/rss/HomePage",
         "parameters": {
           "cat": {
-            "description": "Category name, corresponding to the last segment of [official feed's](https://www.nytimes.com/rss) url."
+            "description": "Category name, corresponding to the last segment of [official feed's](https://www.nytimes.com/rss) url.",
+            "default": "HomePage"
           }
         },
         "features": {
@@ -135379,7 +135347,7 @@
           "language": "Language, see below, arabic by default, as Arabic",
           "category": "Category, can be found in URL, homepage by default"
         },
-        "description": "Language\n\n| Arabic | Chinese | English |\n| ------ | ------- | ------- |\n| arabic | chinese | english |\n\n::: tip\nIf you subscribe to [Al Jazeera English - Economy](https://www.aljazeera.com/economy), whose language is `english` and whose path is `economy`, you can get the route as [`/aljazeera/english/economy`](https://rsshub.app/aljazeera/english/economy)\n\nIf you subscribe to [Al Jazeera Chinese - Political](https://chinese.aljazeera.net/news/political) with language `chinese` and path `news/political`, you can get the route as [`/aljazeera/chinese/news/political`](https://rsshub.app/aljazeera/chinese/news/political)\n:::",
+        "description": "Language\n\n| Arabic | English |\n| ------ | ------- |\n| arabic | english |\n\n::: tip\nIf you subscribe to [Al Jazeera English - Economy](https://www.aljazeera.com/economy), whose language is `english` and whose path is `economy`, you can get the route as [`/aljazeera/english/economy`](https://rsshub.app/aljazeera/english/economy)\n:::",
         "radar": [
           {
             "source": [
@@ -135394,13 +135362,6 @@
               "www.aljazeera.net/"
             ],
             "target": "/arabic/:category"
-          },
-          {
-            "source": [
-              "chinese.aljazeera.net/:category",
-              "chinese.aljazeera.net/"
-            ],
-            "target": "/chinese/:category"
           }
         ],
         "name": "News",
@@ -135419,7 +135380,7 @@
         "parameters": {
           "language": "Language, see below, arabic by default, as Arabic"
         },
-        "description": "Language\n\n| Arabic | Chinese | English |\n| ------ | ------- | ------- |\n| arabic | chinese | english |\n\n::: tip\nThere is no RSS source for Al Jazeera Chinese, returning homepage content by default\n:::",
+        "description": "Language\n\n| Arabic | English |\n| ------ | ------- |\n| arabic | english |",
         "radar": [
           {
             "source": [
@@ -135453,7 +135414,7 @@
           "language": "Language, see below, arabic by default, as Arabic",
           "id": "Tag id, can be found in URL"
         },
-        "description": "Language\n\n| Arabic | Chinese | English |\n| ------ | ------- | ------- |\n| arabic | chinese | english |\n\n::: tip\nIf you subscribe to [Al Jazeera English - Science and Technology](https://www.aljazeera.com/tag/science-and-technology), whose language is `english` and whose path is `science-and-technology`, you can get the route as [`/aljazeera/english/tag/science-and-technology`](https://rsshub.app/aljazeera/english/tag/science-and-technology)\n:::",
+        "description": "Language\n\n| Arabic | English |\n| ------ | ------- |\n| arabic | english |\n\n::: tip\nIf you subscribe to [Al Jazeera English - Science and Technology](https://www.aljazeera.com/tag/science-and-technology), whose language is `english` and whose path is `science-and-technology`, you can get the route as [`/aljazeera/english/tag/science-and-technology`](https://rsshub.app/aljazeera/english/tag/science-and-technology)\n:::",
         "radar": [
           {
             "source": [
@@ -135468,13 +135429,6 @@
               "www.aljazeera.net/"
             ],
             "target": "/arabic/tag/:id"
-          },
-          {
-            "source": [
-              "chinese.aljazeera.net/tag/:id",
-              "chinese.aljazeera.net/"
-            ],
-            "target": "/chinese/tag/:id"
           }
         ],
         "name": "Tag",
@@ -146038,7 +145992,7 @@
           "EsuRt",
           "howfool"
         ],
-        "description": "| 政务部门 | 滚动新闻 | 新闻要闻 | 国务院新闻 | 国务院工作会议 | 政策文件 |\n| :------: | :------: | :------: | :--------: | :------------: | :------: |\n|    bm    |    gd    |    yw    |     gwy    |     gwyzzjg    |  zhengce |",
+        "description": "| 政务联播 | 滚动新闻 | 新闻要闻 | 国务院新闻 | 国务院工作会议 | 政策文件 |\n| :------: | :------: | :------: | :--------: | :------------: | :------: |\n|    bm    |    gd    |    yw    |     gwy    |     gwyzzjg    |  zhengce |",
         "location": "news/index.ts",
         "module": "() => import('@/routes/gov/cn/news/index.ts')"
       },
