@@ -2583,6 +2583,9 @@
   "/asus/bios/:model/:lang?": [
     "Fatpandac"
   ],
+  "/asus/driver/:model/:lang?/:os?": [
+    "regulad"
+  ],
   "/asus/gpu-tweak": [
     "TonyRL"
   ],
@@ -4707,6 +4710,9 @@
   ],
   "/grist/featured": [
     "Rjnishant530"
+  ],
+  "/groq/blog": [
+    "ljh12138164"
   ],
   "/gs/developer/blog": [
     "chesha1"
