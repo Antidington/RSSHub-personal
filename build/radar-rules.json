@@ -22509,19 +22509,6 @@
       }
     ]
   },
-  "foreverblog.cn": {
-    "_name": "十年之约",
-    "www": [
-      {
-        "title": "专题展示 - 文章",
-        "docs": "https://docs.rsshub.app/routes/foreverblog",
-        "source": [
-          "/feeds.html"
-        ],
-        "target": "/foreverblog/feeds"
-      }
-    ]
-  },
   "fortunechina.com": {
     "_name": "财富中文网",
     ".": [
@@ -60197,6 +60184,24 @@
           "/"
         ],
         "target": "/openai/cookbook"
+      },
+      {
+        "title": "Developers Blog",
+        "docs": "https://docs.rsshub.app/routes/openai",
+        "source": [
+          "/blog",
+          "/blog/:slug"
+        ],
+        "target": "/openai/developers/blog"
+      },
+      {
+        "title": "Developers Blog",
+        "docs": "https://docs.rsshub.app/routes/openai",
+        "source": [
+          "/zh-Hans/blog",
+          "/zh-Hans/blog/:slug"
+        ],
+        "target": "/openai/developers/blog/zh-Hans"
       }
     ]
   },

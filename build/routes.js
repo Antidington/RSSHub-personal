@@ -60789,45 +60789,6 @@ export default {
     "url": "www.foreignaffairs.com",
     "lang": "en"
   },
-  "foreverblog": {
-    "routes": {
-      "/feeds": {
-        "path": "/feeds",
-        "categories": [
-          "blog"
-        ],
-        "example": "/foreverblog/feeds",
-        "parameters": {},
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "www.foreverblog.cn/feeds.html"
-            ]
-          }
-        ],
-        "name": "专题展示 - 文章",
-        "maintainers": [
-          "7Wate",
-          "a180285"
-        ],
-        "url": "www.foreverblog.cn/feeds.html",
-        "location": "feeds.ts",
-        "module": () => import('@/routes/foreverblog/feeds.ts')
-      }
-    },
-    "apiRoutes": {},
-    "name": "十年之约",
-    "url": "www.foreverblog.cn",
-    "lang": "zh-CN"
-  },
   "fortunechina": {
     "routes": {
       "/:category?": {
@@ -159703,6 +159664,83 @@ export default {
         "name": "Cookbook",
         "location": "cookbook.ts",
         "module": () => import('@/routes/openai/cookbook.ts')
+      },
+      "/developers/blog/:lang?": {
+        "path": "/developers/blog/:lang?",
+        "name": "Developers Blog",
+        "url": "developers.openai.com/blog",
+        "example": "/openai/developers/blog",
+        "categories": [
+          "programming"
+        ],
+        "view": 0,
+        "maintainers": [
+          "ljh12138164"
+        ],
+        "parameters": {
+          "lang": {
+            "description": "Language code (`en` by default, `zh-Hans` for Simplified Chinese).",
+            "default": "en",
+            "options": [
+              {
+                "value": "en",
+                "label": "English"
+              },
+              {
+                "value": "zh-Hans",
+                "label": "简体中文"
+              }
+            ]
+          }
+        },
+        "description": "Full-text engineering and developer posts from the official OpenAI Developer Blog (`developers.openai.com/blog` by default, or `zh-Hans` for Simplified Chinese). Fetches up to 20 entries by default; supports the common `limit` parameter.",
+        "zh": {
+          "name": "开发者博客",
+          "parameters": {
+            "lang": {
+              "description": "语言版本（默认 `en` 对应英文站，传入 `zh-Hans` 可切换简体中文站）。",
+              "default": "en",
+              "options": [
+                {
+                  "value": "en",
+                  "label": "English"
+                },
+                {
+                  "value": "zh-Hans",
+                  "label": "简体中文"
+                }
+              ]
+            }
+          },
+          "description": "抓取 OpenAI 官方开发者博客全文（涵盖 Codex、Agents SDK、API 工程实践等，默认英文站，传入 `zh-Hans` 切换中文站），默认返回最多 20 篇，支持通用 `limit` 参数。"
+        },
+        "radar": [
+          {
+            "source": [
+              "developers.openai.com/blog",
+              "developers.openai.com/blog/:slug"
+            ],
+            "target": "/developers/blog"
+          },
+          {
+            "source": [
+              "developers.openai.com/zh-Hans/blog",
+              "developers.openai.com/zh-Hans/blog/:slug"
+            ],
+            "target": "/developers/blog/zh-Hans"
+          }
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false,
+          "supportRadar": true
+        },
+        "location": "developers-blog.ts",
+        "module": () => import('@/routes/openai/developers-blog.ts')
       },
       "/news": {
         "path": "/news",

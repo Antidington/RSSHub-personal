@@ -1215,7 +1215,6 @@ export type RoutePath =
   | `/foresightnews/article`
   | `/foresightnews/column/:id`
   | `/foresightnews/news`
-  | `/foreverblog/feeds`
   | `/forklog/news`
   | `/fortnite/news/:options?`
   | `/fortunechina/:category?`
@@ -2646,6 +2645,7 @@ export type RoutePath =
   | `/oo-software/changelog/:id`
   | `/openai/chatgpt/release-notes`
   | `/openai/cookbook`
+  | `/openai/developers/blog/:lang?`
   | `/openai/news`
   | `/openai/research`
   | `/openalex/:journals/:type?/:ids?`

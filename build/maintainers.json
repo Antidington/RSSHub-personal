@@ -4422,10 +4422,6 @@
   "/foreignaffairs/rss": [
     "dzx-dzx"
   ],
-  "/foreverblog/feeds": [
-    "7Wate",
-    "a180285"
-  ],
   "/fortunechina/:category?": [
     "nczitzk"
   ],
@@ -11828,6 +11824,9 @@
   ],
   "/openai/cookbook": [
     "liyaozhong"
+  ],
+  "/openai/developers/blog/:lang?": [
+    "ljh12138164"
   ],
   "/openai/news": [
     "goestav",
