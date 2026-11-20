@@ -460,15 +460,18 @@ importers:
       '@cloudflare/containers':
         specifier: 0.3.7
         version: 0.3.7
+      '@cloudflare/oxlint-config':
+        specifier: 0.1.0
+        version: 0.1.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(supports-color@10.2.2)(tsrs@7.1.0-beta.tsrs3)
       '@cloudflare/playwright':
         specifier: 1.4.0
         version: 1.4.0
       '@cloudflare/vitest-plugin':
         specifier: 1.8.3
-        version: 1.8.3(@cloudflare/workers-types@5.20261116.1)(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10)(vitest@5.1.0)
+        version: 1.8.3(@cloudflare/workers-types@5.20261117.1)(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10)(vitest@5.1.0)
       '@cloudflare/workers-types':
-        specifier: 5.20261116.1
-        version: 5.20261116.1
+        specifier: 5.20261117.1
+        version: 5.20261117.1
       '@eslint/js':
         specifier: 10.0.1
         version: 10.0.1(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))
@@ -527,8 +530,8 @@ importers:
         specifier: 8.73.0
         version: 8.73.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)
       '@vercel/nft':
-        specifier: 1.11.4
-        version: 1.11.4(rollup@4.65.0)(supports-color@10.2.2)
+        specifier: 1.11.5
+        version: 1.11.5(rollup@4.65.0)(supports-color@10.2.2)
       '@vitest/coverage-v8':
         specifier: 5.1.0
         version: 5.1.0(vitest@5.1.0)
@@ -630,7 +633,7 @@ importers:
         version: 5.1.0(@opentelemetry/api@1.10.0)(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(jsdom@31.0.1(@noble/hashes@2.4.0))(msw@3.0.6(@types/node@26.6.6)(@typescript/typescript6@6.0.2)(graphql@16.14.2)(supports-color@10.2.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)))(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       wrangler:
         specifier: 4.163.0
-        version: 4.163.0(@cloudflare/workers-types@5.20261116.1)(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+        version: 4.163.0(@cloudflare/workers-types@5.20261117.1)(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
       yaml-eslint-parser:
         specifier: 2.1.0
         version: 2.1.0
@@ -772,6 +775,13 @@ packages:
     resolution: {integrity: sha512-jxQYkj8dSIzc0cD6cMMNdOc1UVjqSqu8BZdor5s8cGjW2I8BjODt/kWPVdY+u9zj3ms75Q5qaZgnxUad83+eAg==}
     engines: {node: '>=22.0.0'}
 
+  '@cloudflare/oxlint-config@0.1.0':
+    resolution: {integrity: sha512-ZIajMHdEImUjtKZEHbpddrXsnNBpQT7Gy1MZg2lOL3ketdmWYpNWtZghkkKAlhgi2R8z/HATZyas4OOpMy6TIQ==}
+    engines: {node: ^22.18.0 || >=24.0.0}
+    peerDependencies:
+      oxlint: ^1.94.0
+      tsrs: '>=0.25.0-ts7.1.0-beta'
+
   '@cloudflare/playwright@1.4.0':
     resolution: {integrity: sha512-VQa2JawivLEsKutCzY7ctwx/ZeAgorjpr3rLZ3mxnaBJWQawDYGTcUwBi2c24z24/UtKrJrWnrwYqlAfQaYwvw==}
     peerDependencies:
@@ -827,8 +837,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@cloudflare/workers-types@5.20261116.1':
-    resolution: {integrity: sha512-bym4dNT9Hnm+goedLTTTH85T6S4wOJJaOpKgk9MlEGU18/JKsChN+wHvSWUAIy5YVSm6LnuaUu3d3N4K0m8Dtg==}
+  '@cloudflare/workers-types@5.20261117.1':
+    resolution: {integrity: sha512-0Qg3kAn8DPRQLaT8ZkqCm6+2/ctc61zdWZqN/1JtlrXV+Db1fNwnjHBLz+/GB/yX+/JgdDAFs+fr8vYyC0w9aw==}
 
   '@colors/colors@1.6.0':
     resolution: {integrity: sha512-Ir+AOibqzrIsL6ajt3Rz3LskB7OiMVHqltZmspbW/TJuTVuyOMirVqAkjfY6JISiLHgyNqicAC8AyHHGzNd/dA==}
@@ -1526,6 +1536,17 @@ packages:
     peerDependencies:
       '@emnapi/core': ^1.7.1 || 2.0.0-beta.2 || 2.0.0-beta.3
       '@emnapi/runtime': ^1.7.1 || 2.0.0-beta.2 || 2.0.0-beta.3
+
+  '@nkzw/eslint-plugin@2.0.0':
+    resolution: {integrity: sha512-IoU8kOqHfnf7se2dGxMD/7RPm6WVjzjOjWSo7FulRx3lJzuZvXioSkT5Nd82l66DH3Pl2whw74lPT1di3KMwFA==}
+    peerDependencies:
+      eslint: '>= 9'
+
+  '@nkzw/oxlint-config@3.0.0':
+    resolution: {integrity: sha512-eBLEwZp7Q0HMPr5ixSBH+Brv4+ZFUJkjSnrpBJNHjBzusi4uau91VWVlzFUePascXWAmv2LVR3emwE8666oViw==}
+    peerDependencies:
+      oxlint: '>=1.94.0'
+      tsrs: '>=0.25.0-ts7.1.0-beta'
 
   '@noble/ciphers@1.3.0':
     resolution: {integrity: sha512-2I0gnIVPtfnMw9ee9h1dJG7tp81+8Ob3OJb3Mv37rx5L40/b0i7djjCVvGOVqc9AEIQyvyu1i6ypKdFw8R8gQw==}
@@ -3211,8 +3232,8 @@ packages:
     resolution: {integrity: sha512-mbCddXd+jm7hfx7w2YU64/Av4/NqqeG3GoRZgxPcgoTxYjhrcfJRw9ULch71SS4G+Q3bOXFhRvPqjguN0Hyp5w==}
     hasBin: true
 
-  '@vercel/nft@1.11.4':
-    resolution: {integrity: sha512-Bx8P9IBDnLxUEOILkHoolUD2wXFqblCMjY02S85LD0f2I1iQpQ7F9Kufzu2PCWm+J13m1Cex+g5Yx5lrGbCEdg==}
+  '@vercel/nft@1.11.5':
+    resolution: {integrity: sha512-v2gz5HrZQgHR0tOE3kdHGlbX7wfWHACfdZd2LQikPfXm6q4XW9FiB0oSLrYiZ47Rr2RlBRY+KRk/YMJrtJv0cA==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -3955,6 +3976,19 @@ packages:
       ts-declaration-location:
         optional: true
       typescript:
+        optional: true
+
+  eslint-plugin-no-only-tests@3.4.0:
+    resolution: {integrity: sha512-4S3/9Nb7A2tiMcpzEQE9bQSlpeOz6WJkgryBuou/SA8W2x2c8Zf4j0NvTKBjv6qNhF9T79tmkecm/0CHqV0UGg==}
+    engines: {node: '>=5.0.0'}
+
+  eslint-plugin-perfectionist@5.14.0:
+    resolution: {integrity: sha512-z8mINHD3a4lMwtCuBJ5d5oZjfKwFjWF1gVKXxnUr04beCFwFYQP4TWd+182Mnk038n5Wc+LtSuvQMpbnPvdVSg==}
+    engines: {node: ^20.0.0 || >=22.0.0}
+    peerDependencies:
+      eslint: ^8.45.0 || ^9.0.0 || ^10.0.0
+    peerDependenciesMeta:
+      eslint:
         optional: true
 
   eslint-plugin-regexp@3.3.3:
@@ -4981,6 +5015,10 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+
+  natural-orderby@5.0.0:
+    resolution: {integrity: sha512-kKHJhxwpR/Okycz4HhQKKlhWe4ASEfPgkSWNmKFHd7+ezuQlxkA5cM3+XkBPvm1gmHen3w53qsYAv+8GwRrBlg==}
+    engines: {node: '>=18'}
 
   netmask@2.1.1:
     resolution: {integrity: sha512-eonl3sLUha+S1GzTPxychyhnUzKyeQkZ7jLjKrBagJgPla13F+uQ71HgpFefyHgqrjEbCPkDArxYsjY8/+gLKA==}
@@ -6410,6 +6448,17 @@ snapshots:
 
   '@cloudflare/kv-asset-handler@0.5.0': {}
 
+  '@cloudflare/oxlint-config@0.1.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(supports-color@10.2.2)(tsrs@7.1.0-beta.tsrs3)':
+    dependencies:
+      '@nkzw/oxlint-config': 3.0.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(supports-color@10.2.2)(tsrs@7.1.0-beta.tsrs3)
+      oxlint: 1.94.0(oxlint-tsgolint@7.0.2007)
+      tsrs: 7.1.0-beta.tsrs3
+    transitivePeerDependencies:
+      - '@typescript/native'
+      - eslint
+      - supports-color
+      - typescript
+
   '@cloudflare/playwright@1.4.0': {}
 
   '@cloudflare/runtime-types@0.1.29(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10)':
@@ -6428,13 +6477,13 @@ snapshots:
     optionalDependencies:
       workerd: 1.20261116.1
 
-  '@cloudflare/vitest-plugin@1.8.3(@cloudflare/workers-types@5.20261116.1)(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10)(vitest@5.1.0)':
+  '@cloudflare/vitest-plugin@1.8.3(@cloudflare/workers-types@5.20261117.1)(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10)(vitest@5.1.0)':
     dependencies:
       cjs-module-lexer: 1.2.3
       esbuild: 0.28.2
       miniflare: 5.20261116.0-beta(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
       vitest: 5.1.0(@opentelemetry/api@1.10.0)(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(jsdom@31.0.1(@noble/hashes@2.4.0))(msw@3.0.6(@types/node@26.6.6)(@typescript/typescript6@6.0.2)(graphql@16.14.2)(supports-color@10.2.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1)))(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
-      wrangler: 4.163.0(@cloudflare/workers-types@5.20261116.1)(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
+      wrangler: 4.163.0(@cloudflare/workers-types@5.20261117.1)(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
       zod: 4.6.6
     transitivePeerDependencies:
       - '@cloudflare/workers-types'
@@ -6458,7 +6507,7 @@ snapshots:
   '@cloudflare/workerd-windows-64@1.20261116.1':
     optional: true
 
-  '@cloudflare/workers-types@5.20261116.1': {}
+  '@cloudflare/workers-types@5.20261117.1': {}
 
   '@colors/colors@1.6.0': {}
 
@@ -7004,6 +7053,23 @@ snapshots:
       '@emnapi/core': 2.0.0-alpha.6
       '@emnapi/runtime': 2.0.0-alpha.6
       '@tybys/wasm-util': 0.10.4
+
+  '@nkzw/eslint-plugin@2.0.0(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))':
+    dependencies:
+      eslint: 10.15.0(jiti@2.7.0)(supports-color@10.2.2)
+
+  '@nkzw/oxlint-config@3.0.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(supports-color@10.2.2)(tsrs@7.1.0-beta.tsrs3)':
+    dependencies:
+      '@nkzw/eslint-plugin': 2.0.0(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))
+      eslint-plugin-no-only-tests: 3.4.0
+      eslint-plugin-perfectionist: 5.14.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)
+      oxlint: 1.94.0(oxlint-tsgolint@7.0.2007)
+      tsrs: 7.1.0-beta.tsrs3
+    transitivePeerDependencies:
+      - '@typescript/native'
+      - eslint
+      - supports-color
+      - typescript
 
   '@noble/ciphers@1.3.0': {}
 
@@ -8175,7 +8241,7 @@ snapshots:
     dependencies:
       '@typescript/old': typescript@6.0.3
 
-  '@vercel/nft@1.11.4(rollup@4.65.0)(supports-color@10.2.2)':
+  '@vercel/nft@1.11.5(rollup@4.65.0)(supports-color@10.2.2)':
     dependencies:
       '@mapbox/node-pre-gyp': 2.0.3(supports-color@10.2.2)
       '@rollup/pluginutils': 5.4.0(rollup@4.65.0)
@@ -8899,6 +8965,20 @@ snapshots:
       semver: 7.8.5
     optionalDependencies:
       typescript: '@typescript/typescript6@6.0.2'
+
+  eslint-plugin-no-only-tests@3.4.0: {}
+
+  eslint-plugin-perfectionist@5.14.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2):
+    dependencies:
+      '@typescript-eslint/types': 8.73.0
+      '@typescript-eslint/utils': 8.73.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)
+      natural-orderby: 5.0.0
+    optionalDependencies:
+      eslint: 10.15.0(jiti@2.7.0)(supports-color@10.2.2)
+    transitivePeerDependencies:
+      - '@typescript/native'
+      - supports-color
+      - typescript
 
   eslint-plugin-regexp@3.3.3(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2)):
     dependencies:
@@ -10154,6 +10234,8 @@ snapshots:
   narou@2.1.0: {}
 
   natural-compare@1.4.0: {}
+
+  natural-orderby@5.0.0: {}
 
   netmask@2.1.1: {}
 
@@ -11434,7 +11516,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20261116.1
       '@cloudflare/workerd-windows-64': 1.20261116.1
 
-  wrangler@4.163.0(@cloudflare/workers-types@5.20261116.1)(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10):
+  wrangler@4.163.0(@cloudflare/workers-types@5.20261117.1)(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
       '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261116.1)
@@ -11446,7 +11528,7 @@ snapshots:
       unenv: 2.0.0-rc.24
       workerd: 1.20261116.1
     optionalDependencies:
-      '@cloudflare/workers-types': 5.20261116.1
+      '@cloudflare/workers-types': 5.20261117.1
       fsevents: 2.3.3
     transitivePeerDependencies:
       - '@types/node'
