@@ -1334,20 +1334,6 @@
       }
     ]
   },
-  "the-decoder.com": {
-    "_name": "The Decoder",
-    ".": [
-      {
-        "title": "News",
-        "docs": "https://docs.rsshub.app/routes/the-decoder",
-        "source": [
-          "/",
-          "/artificial-intelligence-news/"
-        ],
-        "target": "/the-decoder/news"
-      }
-    ]
-  },
   "unusualwhales.com": {
     "_name": "Unusual Whales",
     ".": [
@@ -11791,6 +11777,33 @@
           "/:language/100100"
         ],
         "target": "/apple/security-releases/:language?"
+      }
+    ],
+    "machinelearning": [
+      {
+        "title": "Machine Learning Research",
+        "docs": "https://docs.rsshub.app/routes/apple",
+        "source": [
+          "/",
+          "/research/:slug"
+        ],
+        "target": "/apple/ml-research"
+      },
+      {
+        "title": "Machine Learning Research",
+        "docs": "https://docs.rsshub.app/routes/apple",
+        "source": [
+          "/highlights"
+        ],
+        "target": "/apple/ml-research/highlights"
+      },
+      {
+        "title": "Machine Learning Research",
+        "docs": "https://docs.rsshub.app/routes/apple",
+        "source": [
+          "/research"
+        ],
+        "target": "/apple/ml-research/research"
       }
     ],
     "podcasts": [
@@ -48200,6 +48213,20 @@
           "/occasus/rawdhl9hugdfn9"
         ],
         "target": "/the/category/rawdhl9hugdfn9"
+      }
+    ]
+  },
+  "the-decoder.com": {
+    "_name": "The Decoder",
+    ".": [
+      {
+        "title": "News",
+        "docs": "https://docs.rsshub.app/routes/the-decoder",
+        "source": [
+          "/",
+          "/artificial-intelligence-news/"
+        ],
+        "target": "/the-decoder/news"
       }
     ]
   },
