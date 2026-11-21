@@ -2524,6 +2524,9 @@
   "/amazon/awsblogs/:locale?": [
     "HankChow"
   ],
+  "/amazon/blogs/:category?": [
+    "ljh12138164"
+  ],
   "/amazon/kindle/software-updates": [
     "IvanWng97"
   ],
@@ -5919,6 +5922,9 @@
   "/maldita/updates/:category?": [
     "canonnizq"
   ],
+  "/manager-dev/newsletter/:sort?": [
+    "Rjnishant530"
+  ],
   "/manhuagui/comic/:id/:chapterCnt?": [
     "MegrezZhu"
   ],
@@ -8826,6 +8832,9 @@
   ],
   "/v2ex/xna": [
     "luckyscript"
+  ],
+  "/valueresearchonline/knowledge-center/:section": [
+    "Rjnishant530"
   ],
   "/vb-audio/voicemeeter/changelog": [
     "TonyRL"

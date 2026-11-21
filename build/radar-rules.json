@@ -11552,6 +11552,22 @@
       }
     ]
   },
+  "amazon.com": {
+    "_name": "Amazon",
+    "aws": [
+      {
+        "title": "AWS Blog",
+        "docs": "https://docs.rsshub.app/routes/amazon",
+        "source": [
+          "/blogs",
+          "/blogs/:category",
+          "/blogs/:category/feed",
+          "/blogs/:category/:slug"
+        ],
+        "target": "/amazon/blogs/:category?"
+      }
+    ]
+  },
   "android.com": {
     "_name": "Android",
     "source": [
@@ -32345,6 +32361,19 @@
       }
     ]
   },
+  "manager.dev": {
+    "_name": "Manager.dev",
+    "www": [
+      {
+        "title": "Newsletter",
+        "docs": "https://docs.rsshub.app/routes/manager-dev",
+        "source": [
+          "/newsletter"
+        ],
+        "target": "/manager-dev/newsletter"
+      }
+    ]
+  },
   "mhgui.com": {
     "_name": "看漫画",
     "www": [
@@ -49845,6 +49874,27 @@
           "/t/:postid"
         ],
         "target": "/v2ex/post/:postid"
+      }
+    ]
+  },
+  "valueresearchonline.com": {
+    "_name": "Value Research",
+    "www": [
+      {
+        "title": "Knowledge Center",
+        "docs": "https://docs.rsshub.app/routes/valueresearchonline",
+        "source": [
+          "/indexinvestor/"
+        ],
+        "target": "/valueresearchonline/knowledge-center/index-investor"
+      },
+      {
+        "title": "Knowledge Center",
+        "docs": "https://docs.rsshub.app/routes/valueresearchonline",
+        "source": [
+          "/knowledge-center/:section/"
+        ],
+        "target": "/valueresearchonline/knowledge-center/:section"
       }
     ]
   },
