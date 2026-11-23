@@ -8,6 +8,8 @@ import { parseDate } from '@/utils/time';
 
 export const baseUrl = 'https://www.facebook.com';
 
+type Variable = string | number | boolean | null | Variable[] | { [key: string]: Variable };
+
 const providerVariables = {
     __relay_internal__pv__GHLShouldChangeAdIdFieldNamerelayprovider: false,
     __relay_internal__pv__GHLShouldChangeSponsoredDataFieldNamerelayprovider: false,
@@ -38,17 +40,14 @@ const providerVariables = {
     __relay_internal__pv__StoriesShouldIncludeFbNotesrelayprovider: false,
 };
 
-const collectStories = (value: any, stories: any[]) => {
+const collectStories = (value: any): any[] => {
     if (!value || typeof value !== 'object') {
-        return;
+        return [];
     }
     if (value.__typename === 'Story') {
-        stories.push(value);
-        return;
+        return [value];
     }
-    for (const child of Object.values(value)) {
-        collectStories(child, stories);
-    }
+    return Object.values(value).flatMap((child) => collectStories(child));
 };
 
 const findPageInfo = (value: any): { has_next_page: boolean; end_cursor: string } | undefined => {
@@ -153,7 +152,7 @@ const renderStory = (story: any) => {
     return { text: message?.text as string | undefined, html: text + attachments };
 };
 
-export const fetchGraphql = async (friendlyName: string, docId: string, variables: Record<string, string | number | boolean | null>, limit: number, collect: (lines: any[]) => any[]) => {
+export const fetchGraphql = async (friendlyName: string, docId: string, variables: Record<string, Variable>, limit: number, collect: (lines: any[]) => any[]) => {
     const lsd = randomBytes(16).toBase64({ alphabet: 'base64url', omitPadding: true });
     const jazoest = `2${Array.from(lsd, (char) => char.codePointAt(0)!).reduce((sum, code) => sum + code, 0)}`;
 
@@ -176,7 +175,7 @@ export const fetchGraphql = async (friendlyName: string, docId: string, variable
         const cursor = pageInfo.end_cursor;
         // oxlint-disable-next-line no-await-in-loop - depends on previous response for cursor
         const text = await cache.tryGet<string>(
-            `facebook:${friendlyName}:${variables.id}:${cursor ?? ''}`,
+            `facebook:${friendlyName}:${variables.id ?? JSON.stringify(variables.args)}:${cursor ?? ''}`,
             () =>
                 ofetch(`${baseUrl}/api/graphql/`, {
                     method: 'POST',
@@ -205,7 +204,7 @@ export const fetchGraphql = async (friendlyName: string, docId: string, variable
     return items.slice(0, limit);
 };
 
-export const fetchStories = (friendlyName: string, docId: string, variables: Record<string, string | number | boolean>, limit: number) =>
+export const fetchStories = (friendlyName: string, docId: string, variables: Record<string, Variable>, limit: number) =>
     fetchGraphql(
         friendlyName,
         docId,
@@ -217,13 +216,7 @@ export const fetchStories = (friendlyName: string, docId: string, variables: Rec
             useDefaultActor: false,
         },
         limit,
-        (lines) => {
-            const stories: any[] = [];
-            for (const data of lines) {
-                collectStories(data, stories);
-            }
-            return stories;
-        }
+        (lines) => lines.flatMap((data) => collectStories(data))
     );
 
 export const storiesToItems = (stories: any[]) =>
