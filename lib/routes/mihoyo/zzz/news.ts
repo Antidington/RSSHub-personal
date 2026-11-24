@@ -45,7 +45,7 @@ const categories = {
         },
         title: '絕區零',
         link: 'https://zenless.hoyoverse.com/zh-tw/news',
-        apiRootUrl: 'https://api-os-takumi-static.hoyoverse.com/content_v2_user/app/3e9196a4b9274bd7/getContentList',
+        apiRootUrl: 'https://sg-public-api-static.hoyoverse.com/content_v2_user/app/3e9196a4b9274bd7/getContentList',
     },
 };
 
@@ -69,7 +69,7 @@ export const route: Route = {
         },
     ],
     name: '绝区零',
-    maintainers: ['Yeye-0426'],
+    maintainers: ['Coxwtwo'],
     handler,
     url: 'zzz.mihoyo.com/news',
     description: `#### 新闻 {#mi-ha-you-jue-qu-ling-xin-wen}
@@ -89,7 +89,7 @@ async function handler(ctx) {
 
     const params = {
         'zh-cn': `iPageSize=${limit}&iPage=1&sLangKey=zh-cn&isPreview=0&iChanId=${categories[location][category].id}`,
-        'zh-tw': `iPageSize=${limit}&iPage=1&sLangKey=zh-tw&isPreview=0&iChanId=${categories[location][category].id}`,
+        'zh-tw': `iPageSize=${limit}&iPage=1&sLangKey=zh-tw&iChanId=${categories[location][category].id}`,
     };
 
     const apiUrl = `${categories[location].apiRootUrl}?${params[location]}`;

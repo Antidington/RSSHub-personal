@@ -214,8 +214,8 @@ importers:
         specifier: 6.17.2
         version: 6.17.2
       '@hono/node-server':
-        specifier: 2.1.9
-        version: 2.1.9(hono@4.13.19)
+        specifier: 2.1.11
+        version: 2.1.11(hono@4.13.19)
       '@hono/zod-openapi':
         specifier: 1.6.3
         version: 1.6.3(hono@4.13.19)(zod@4.6.7)
@@ -302,7 +302,7 @@ importers:
         version: 10.0.1
       http-cookie-agent:
         specifier: 8.0.0
-        version: 8.0.0(tough-cookie@6.1.0)(undici@8.13.0)
+        version: 8.0.0(tough-cookie@6.1.0)(undici@8.13.1)
       https-proxy-agent:
         specifier: 9.1.0
         version: 9.1.0(supports-color@10.2.2)
@@ -310,8 +310,8 @@ importers:
         specifier: 0.7.3
         version: 0.7.3
       imapflow:
-        specifier: 2.12.1
-        version: 2.12.1
+        specifier: 2.12.2
+        version: 2.12.2
       ioredis:
         specifier: 6.0.0
         version: 6.0.0(supports-color@10.2.2)
@@ -415,8 +415,8 @@ importers:
         specifier: 1.6.4
         version: 1.6.4
       undici:
-        specifier: 8.13.0
-        version: 8.13.0
+        specifier: 8.13.1
+        version: 8.13.1
       uuid:
         specifier: 14.0.3
         version: 14.0.3
@@ -453,7 +453,7 @@ importers:
         version: 0.3.7
       '@cloudflare/oxlint-config':
         specifier: 0.1.0
-        version: 0.1.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(supports-color@10.2.2)(tsrs@7.1.0-beta.tsrs3)
+        version: 0.1.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(supports-color@10.2.2)(tsrs@7.1.0-beta.tsrs4)
       '@cloudflare/playwright':
         specifier: 1.4.0
         version: 1.4.0
@@ -515,8 +515,8 @@ importers:
         specifier: 8.73.0
         version: 8.73.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)
       '@vercel/nft':
-        specifier: 1.11.10
-        version: 1.11.10(rollup@4.65.0)(supports-color@10.2.2)
+        specifier: 1.11.11
+        version: 1.11.11(rollup@4.65.0)(supports-color@10.2.2)
       '@vitest/coverage-v8':
         specifier: 5.1.1
         version: 5.1.1(vitest@5.1.1)
@@ -524,8 +524,8 @@ importers:
         specifier: 1.0.0-rc.2
         version: 1.0.0-rc.2(@types/node@26.6.6)(bufferutil@4.1.0)(utf-8-validate@5.0.10)
       discord-api-types:
-        specifier: 0.38.59
-        version: 0.38.59
+        specifier: 0.38.60
+        version: 0.38.60
       domhandler:
         specifier: 6.0.1
         version: 6.0.1
@@ -567,7 +567,7 @@ importers:
         version: 3.0.7(@types/node@26.6.6)(@typescript/typescript6@6.0.2)(graphql@16.14.2)(supports-color@10.2.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
       node-network-devtools:
         specifier: 1.0.30
-        version: 1.0.30(undici@8.13.0)(utf-8-validate@5.0.10)
+        version: 1.0.30(undici@8.13.1)(utf-8-validate@5.0.10)
       oxfmt:
         specifier: 0.79.0
         version: 0.79.0
@@ -594,10 +594,10 @@ importers:
         version: 1.3.3
       tsdown:
         specifier: 0.23.7
-        version: 0.23.7(@typescript/typescript6@6.0.2)(oxc-resolver@11.24.2)(tsrs@7.1.0-beta.tsrs3)(tsx@4.23.15)(unrun@0.3.1)
+        version: 0.23.7(@typescript/typescript6@6.0.2)(oxc-resolver@11.24.2)(tsrs@7.1.0-beta.tsrs4)(tsx@4.23.15)(unrun@0.3.1)
       tsrs:
-        specifier: 7.1.0-beta.tsrs3
-        version: 7.1.0-beta.tsrs3
+        specifier: 7.1.0-beta.tsrs4
+        version: 7.1.0-beta.tsrs4
       typescript:
         specifier: npm:@typescript/typescript6@6.0.2
         version: '@typescript/typescript6@6.0.2'
@@ -1126,8 +1126,8 @@ packages:
       fastify-plugin:
         optional: true
 
-  '@hono/node-server@2.1.9':
-    resolution: {integrity: sha512-Sk4NQd3GFY0WZWCzndwFMPwJhtD0y9qjsQ+pjID0/03nK9pxyBCUoUHCho8QYBLBVhi0ssL8UkNPHqbgSOFPIQ==}
+  '@hono/node-server@2.1.11':
+    resolution: {integrity: sha512-KzKz9vl4vvr1vgLHamj+g5uonbrj5NwAdO3yzOS6cd2HjALVeOgTgeZOyAzNxejbkfOOPIcvuf/Tg8l1pEFLog==}
     engines: {node: '>=20'}
     peerDependencies:
       hono: ^4 || ^5.0.0-0
@@ -2953,54 +2953,54 @@ packages:
       oxlint:
         optional: true
 
-  '@tsrs/darwin-arm64@7.1.0-beta.tsrs3':
-    resolution: {integrity: sha512-R1Rh692Gy7XxuDS6Ds+BexqiuHawqH4KVftLu4Ty0vh7cjIPHm4MdWtlU/0MdrbdlJpnGo6Ul1W5BpHIiP+Zgw==}
+  '@tsrs/darwin-arm64@7.1.0-beta.tsrs4':
+    resolution: {integrity: sha512-Be1McQGyHipWIjnkvytZmh7Wi4YVATvTfiEuPX34kfk+W7QCtTdUUHnuLZ7bzwy8LgL9VDCmyvQtWiF3MENxBQ==}
     engines: {node: '>=16.20.0'}
     cpu: [arm64]
     os: [darwin]
 
-  '@tsrs/darwin-x64@7.1.0-beta.tsrs3':
-    resolution: {integrity: sha512-F2IHae89mxUuSTGTbC9WfGdDKeZ12/TQo0tMYRc55llUKmxC7gJ3+1C1uwKXiZG7c6sTg07EYct9pnxEql/85Q==}
+  '@tsrs/darwin-x64@7.1.0-beta.tsrs4':
+    resolution: {integrity: sha512-J9LM9ja4EGcA1/DNnWOo9smswK1Aa4xW+zbCubWdT/4z8SPwCmVwm5sn5KmvNBCHQHkke9KRrBl+zROqz6F74A==}
     engines: {node: '>=16.20.0'}
     cpu: [x64]
     os: [darwin]
 
-  '@tsrs/linux-arm64-gnu@7.1.0-beta.tsrs3':
-    resolution: {integrity: sha512-13V8kMb0iTEv/IY4DUZF4RKO2QycTlty3U3TSLOHLmvyLY+MOcmvg2ixzKm71uCHG0YVZgyUiCjiw8ZdqevT1A==}
+  '@tsrs/linux-arm64-gnu@7.1.0-beta.tsrs4':
+    resolution: {integrity: sha512-RIbwlpYWflMDq9XosRHL7gpwSV5fnEaUvjr3ehzKCcc7E6ozo0mH4m/OgQE3ts/4euWKzZxsK7lN6r091W5mWg==}
     engines: {node: '>=16.20.0'}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@tsrs/linux-arm64-musl@7.1.0-beta.tsrs3':
-    resolution: {integrity: sha512-k9P/n40siZyt1kUUlxfefWDVj/189AsVQIPN3uoIpALx2Y59Ow+7i49fanxDexmGcZTKEfNB2gF2FeWET6o4TQ==}
+  '@tsrs/linux-arm64-musl@7.1.0-beta.tsrs4':
+    resolution: {integrity: sha512-4RGERFCpPayJ74T2eA+ky3VdIS0r1BezKIclqGWRTx/RXnj9H/1NbtEt0aKhj3TrTMPDmInlPiCwRJUv7M9kFA==}
     engines: {node: '>=16.20.0'}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@tsrs/linux-x64-gnu@7.1.0-beta.tsrs3':
-    resolution: {integrity: sha512-erepwUH0NoRDjLeHEEEruh0Gd2/t0n2PHfJwXNlgSNbGM94+nNNZop0sYmjAtx63MadiC9YQXO6blTEQDVpDOg==}
+  '@tsrs/linux-x64-gnu@7.1.0-beta.tsrs4':
+    resolution: {integrity: sha512-YIqFRStXq5yURR+zYDwIKcV126KH+EibPMJ1ZbfT2ToJ0w5zmRUKV/A5z0kjmQu6A6wItLZxOzKjU1v+ad5blA==}
     engines: {node: '>=16.20.0'}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@tsrs/linux-x64-musl@7.1.0-beta.tsrs3':
-    resolution: {integrity: sha512-/qGDUjkuRWNUaTJ8ChRnhJPnmALgCZN6TSVwj3uyGp5Nj8OZ/rulEwciHCsynBaX7KgoWP0SvmvPuPycSJq56g==}
+  '@tsrs/linux-x64-musl@7.1.0-beta.tsrs4':
+    resolution: {integrity: sha512-TQeiFbrxowI26YDaUojRfV7DhDKjXlPWtz9DopyGtufFoKsv2efIzUiEAA8IVw689nUoi0CVl0aWTWio49lWMg==}
     engines: {node: '>=16.20.0'}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@tsrs/win32-arm64@7.1.0-beta.tsrs3':
-    resolution: {integrity: sha512-Q6QtafSuUL3Ram8X/6n0gtUyC/qOmQ1bFsqkCkbwYGMIU/P7l7fsJgMQ0BBKSJBkvfwfZvZ8JpgR9+yrsRumWw==}
+  '@tsrs/win32-arm64@7.1.0-beta.tsrs4':
+    resolution: {integrity: sha512-0YRK8h3vCTtJM7j+GpWByK8ehWMdHPCETLEAeQiW6Xy4wrrJJ2Fso/1FeF6gfi6LyCq1mZMfydn2OiDoJmAu1A==}
     engines: {node: '>=16.20.0'}
     cpu: [arm64]
     os: [win32]
 
-  '@tsrs/win32-x64@7.1.0-beta.tsrs3':
-    resolution: {integrity: sha512-mITdFPru52C0Ws7D7DyLd+pISSwd3GIzM+v4elsXhW5o1n0FJpEr57WDcN8humkhxQinprzOELGIn4qiEXj2jw==}
+  '@tsrs/win32-x64@7.1.0-beta.tsrs4':
+    resolution: {integrity: sha512-JW5JoAammbwL2pXkhC//p/9t7lxg34zHgtA6L5ixiCDw5s+hxxEc85h3sm9M3oYUqCOOi+W6Jw5PLDClN3nMHA==}
     engines: {node: '>=16.20.0'}
     cpu: [x64]
     os: [win32]
@@ -3317,8 +3317,8 @@ packages:
     resolution: {integrity: sha512-mbCddXd+jm7hfx7w2YU64/Av4/NqqeG3GoRZgxPcgoTxYjhrcfJRw9ULch71SS4G+Q3bOXFhRvPqjguN0Hyp5w==}
     hasBin: true
 
-  '@vercel/nft@1.11.10':
-    resolution: {integrity: sha512-19QGcHsHNlLDvHhynjE+qkUvCgX/d7QBtUSLNqx74NFpunbhv/9KZnnO9xGLWIGlUAAwqEPjwa0dsG8adXuX/w==}
+  '@vercel/nft@1.11.11':
+    resolution: {integrity: sha512-iiDMUR5tXVxH+clovSrJV1wkwMPxJu34dQ/wQWjzCYT9iS/1J6Zf2wgdZzTf3X+sG7rJdSOWAQsA173FEwCboQ==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -3882,8 +3882,8 @@ packages:
     resolution: {gitHosted: true, integrity: sha512-OG2C++3YYIzflFjA9irnexBs9eUS6KUOViAssV4oSo4W8HAl86TV+DoFYhdSXVaFd4z5htsM3zzs64WJybH4cQ==, tarball: https://codeload.github.com/postlight/difflib.js/tar.gz/32e8e38c7fcd935241b9baab71bb432fd9b166ed}
     version: 0.2.6
 
-  discord-api-types@0.38.59:
-    resolution: {integrity: sha512-LZqh8gvWU/Bhl9qEVIRLeLJuaPGO7rA26IXLrXnMcjXxofh/h5UhP6notfCTj4X5kR1ogMvVgcrVYIuynY/CxQ==}
+  discord-api-types@0.38.60:
+    resolution: {integrity: sha512-2xPScuQP3WOf3H4EKWLzvnhlfNl8sBMD+krT8CcjMVJa6o9D/6ssOSgKPTvHyIhQDKUX+gvUJZ43U4HqE+6tsA==}
 
   dom-serializer@3.1.1:
     resolution: {integrity: sha512-4MEa38/QexBob6gFNwu+EGdWvhJ1OKuNwdYY3Y3NyeWDQfnGeDYQUDfIRzWu5B5gsv03so2Uxd28YC6zrsx3Lw==}
@@ -4492,8 +4492,8 @@ packages:
     resolution: {integrity: sha512-/8UvqAPU9DGTI9k4mxtf49U37Isfwr8Uts96+SBHIkFxPJnHS0Ew4f00sM4Scd8V8EjM0jUNtVDdv1kPdt35lg==}
     engines: {node: '>= 4'}
 
-  imapflow@2.12.1:
-    resolution: {integrity: sha512-mM0FAU13CU1DMZG9ylow3GgyU+rs0UvWcoZuLpYXWNq3tie0MGNqE/aJqOnNb25kJgeNVtU/spfJ0I0qCYxbpQ==}
+  imapflow@2.12.2:
+    resolution: {integrity: sha512-GnccN3rytpmsbEriYi3R1gLqWnXH2Dp4iAWYcY3sAUNRZ2zpBz8qSB0YSDTa58NSeTA6VGlAPMfbauQo0gnUGA==}
     engines: {node: '>=20.0.0'}
 
   import-without-cache@0.4.1:
@@ -5700,6 +5700,10 @@ packages:
     resolution: {integrity: sha512-e0VyvkVTwVYViNovRkZ9aodhxVlyoMn7eJhVUPxZ+eK9P/7CBkxvvsBOHqFPEH416726W8tLXXXjKwqgTErrCQ==}
     engines: {node: '>= 10.0.0', npm: '>= 3.0.0'}
 
+  socks@2.8.11:
+    resolution: {integrity: sha512-2H/uQ7+SNP0hK16RorTak0mWrFoqo4AnAVGSUl2dT07obgWdWt9grml+VDl1LklgUOPWM4Abo0u86Cvp8vFjYw==}
+    engines: {node: '>= 10.0.0', npm: '>= 3.0.0'}
+
   sonic-boom@4.2.1:
     resolution: {integrity: sha512-w6AxtubXa2wTXAUsZMMWERrsIRAdrK0Sc+FUytWvYAhBJLyuI4llrMIC1DtlNSdI99EI86KZum2MMq3EAZlF9Q==}
 
@@ -5914,8 +5918,8 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
-  tsrs@7.1.0-beta.tsrs3:
-    resolution: {integrity: sha512-iDcoaNkX4j3ZCtO3F40R7gVB2/9oyVQwJ12hb0iWBo3egT13oYpG9wQSPFCiGN7d+uq9FGTwlG0WsQNMBTEGzA==}
+  tsrs@7.1.0-beta.tsrs4:
+    resolution: {integrity: sha512-tPeUolNTUDJFk1Fc660PyFGUK/epGbuQVoo+2GnCIWkNDWp8i1DMI5n2X8pxxevi/3zbO8UvIKjWgE4T7OOCeA==}
     engines: {node: '>=16.20.0'}
     hasBin: true
 
@@ -6007,8 +6011,8 @@ packages:
     resolution: {integrity: sha512-03KrMbjIFDWQR5RNPrSw3bd1r12JpyFQl9/yxjUbJtqkjmllqC5lFjZh6ujeuJCKr8EOQvRW872Oy/az+nLYxg==}
     engines: {node: '>=20.18.1'}
 
-  undici@8.13.0:
-    resolution: {integrity: sha512-mxbeyRlRhHUTWE1zf/FwDOXTKMhE1vMQRz/o2oOir/5fIWsB79TeZrByMkj019EdDuxPg03jprCjFLxLkmxTCQ==}
+  undici@8.13.1:
+    resolution: {integrity: sha512-Kt7EaPjh0s93lJH/PmW3d5rhkcpUa6fS3jqZ7+YGxNd9L7Xy/i827xe4C2uhhq+pJebM4tQOl5AgHmW11G5Skg==}
     engines: {node: '>=22.19.0'}
 
   unenv@2.0.0-rc.24:
@@ -6544,11 +6548,11 @@ snapshots:
 
   '@cloudflare/kv-asset-handler@0.5.1': {}
 
-  '@cloudflare/oxlint-config@0.1.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(supports-color@10.2.2)(tsrs@7.1.0-beta.tsrs3)':
+  '@cloudflare/oxlint-config@0.1.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(supports-color@10.2.2)(tsrs@7.1.0-beta.tsrs4)':
     dependencies:
-      '@nkzw/oxlint-config': 3.0.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(supports-color@10.2.2)(tsrs@7.1.0-beta.tsrs3)
+      '@nkzw/oxlint-config': 3.0.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(supports-color@10.2.2)(tsrs@7.1.0-beta.tsrs4)
       oxlint: 1.94.0(oxlint-tsgolint@7.0.2007)
-      tsrs: 7.1.0-beta.tsrs3
+      tsrs: 7.1.0-beta.tsrs4
     transitivePeerDependencies:
       - '@typescript/native'
       - eslint
@@ -6827,7 +6831,7 @@ snapshots:
       '@types/aws-lambda': 8.10.164
       '@types/express': 5.0.6
 
-  '@hono/node-server@2.1.9(hono@4.13.19)':
+  '@hono/node-server@2.1.11(hono@4.13.19)':
     dependencies:
       hono: 4.13.19
 
@@ -7131,13 +7135,13 @@ snapshots:
     dependencies:
       eslint: 10.15.0(jiti@2.7.0)(supports-color@10.2.2)
 
-  '@nkzw/oxlint-config@3.0.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(supports-color@10.2.2)(tsrs@7.1.0-beta.tsrs3)':
+  '@nkzw/oxlint-config@3.0.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(oxlint@1.94.0(oxlint-tsgolint@7.0.2007))(supports-color@10.2.2)(tsrs@7.1.0-beta.tsrs4)':
     dependencies:
       '@nkzw/eslint-plugin': 2.0.0(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))
       eslint-plugin-no-only-tests: 3.4.0
       eslint-plugin-perfectionist: 5.14.0(@typescript/typescript6@6.0.2)(eslint@10.15.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)
       oxlint: 1.94.0(oxlint-tsgolint@7.0.2007)
-      tsrs: 7.1.0-beta.tsrs3
+      tsrs: 7.1.0-beta.tsrs4
     transitivePeerDependencies:
       - '@typescript/native'
       - eslint
@@ -8054,28 +8058,28 @@ snapshots:
       eslint: 10.15.0(jiti@2.7.0)(supports-color@10.2.2)
       oxlint: 1.94.0(oxlint-tsgolint@7.0.2007)
 
-  '@tsrs/darwin-arm64@7.1.0-beta.tsrs3':
+  '@tsrs/darwin-arm64@7.1.0-beta.tsrs4':
     optional: true
 
-  '@tsrs/darwin-x64@7.1.0-beta.tsrs3':
+  '@tsrs/darwin-x64@7.1.0-beta.tsrs4':
     optional: true
 
-  '@tsrs/linux-arm64-gnu@7.1.0-beta.tsrs3':
+  '@tsrs/linux-arm64-gnu@7.1.0-beta.tsrs4':
     optional: true
 
-  '@tsrs/linux-arm64-musl@7.1.0-beta.tsrs3':
+  '@tsrs/linux-arm64-musl@7.1.0-beta.tsrs4':
     optional: true
 
-  '@tsrs/linux-x64-gnu@7.1.0-beta.tsrs3':
+  '@tsrs/linux-x64-gnu@7.1.0-beta.tsrs4':
     optional: true
 
-  '@tsrs/linux-x64-musl@7.1.0-beta.tsrs3':
+  '@tsrs/linux-x64-musl@7.1.0-beta.tsrs4':
     optional: true
 
-  '@tsrs/win32-arm64@7.1.0-beta.tsrs3':
+  '@tsrs/win32-arm64@7.1.0-beta.tsrs4':
     optional: true
 
-  '@tsrs/win32-x64@7.1.0-beta.tsrs3':
+  '@tsrs/win32-x64@7.1.0-beta.tsrs4':
     optional: true
 
   '@tybys/wasm-util@0.10.4':
@@ -8375,7 +8379,7 @@ snapshots:
     dependencies:
       '@typescript/old': typescript@6.0.3
 
-  '@vercel/nft@1.11.10(rollup@4.65.0)(supports-color@10.2.2)':
+  '@vercel/nft@1.11.11(rollup@4.65.0)(supports-color@10.2.2)':
     dependencies:
       '@mapbox/node-pre-gyp': 2.0.3(supports-color@10.2.2)
       '@rollup/pluginutils': 5.4.0(rollup@4.65.0)
@@ -8902,7 +8906,7 @@ snapshots:
     dependencies:
       heap: 0.2.7
 
-  discord-api-types@0.38.59: {}
+  discord-api-types@0.38.60: {}
 
   dom-serializer@3.1.1:
     dependencies:
@@ -9564,12 +9568,12 @@ snapshots:
 
   http-cache-semantics@4.3.0: {}
 
-  http-cookie-agent@8.0.0(tough-cookie@6.1.0)(undici@8.13.0):
+  http-cookie-agent@8.0.0(tough-cookie@6.1.0)(undici@8.13.1):
     dependencies:
       agent-base: 9.0.0
       tough-cookie: 6.1.0
     optionalDependencies:
-      undici: 8.13.0
+      undici: 8.13.1
 
   http-proxy-agent@9.1.0(supports-color@10.2.2):
     dependencies:
@@ -9631,7 +9635,7 @@ snapshots:
 
   ignore@7.0.12: {}
 
-  imapflow@2.12.1:
+  imapflow@2.12.2:
     dependencies:
       '@zone-eu/mailsplit': 5.4.31
       encoding-japanese: 2.5.0
@@ -9640,7 +9644,7 @@ snapshots:
       libmime: 5.6.5
       libqp: 3.0.2
       pino: 10.3.1
-      socks: 2.8.10
+      socks: 2.8.11
 
   import-without-cache@0.4.1: {}
 
@@ -9774,7 +9778,7 @@ snapshots:
       parse5-parser-stream: 8.1.0
       saxes: 6.0.0
       tough-cookie: 6.1.0
-      undici: 8.13.0
+      undici: 8.13.1
       w3c-xmlserializer: 6.0.0
       webidl-conversions: 8.0.1
       whatwg-mimetype: 5.0.0
@@ -10428,13 +10432,13 @@ snapshots:
     dependencies:
       write-file-atomic: 5.0.1
 
-  node-network-devtools@1.0.30(undici@8.13.0)(utf-8-validate@5.0.10):
+  node-network-devtools@1.0.30(undici@8.13.1)(utf-8-validate@5.0.10):
     dependencies:
       bufferutil: 4.1.0
       iconv-lite: 0.7.3
       inspector: 0.5.0
       open: 8.4.2
-      undici: 8.13.0
+      undici: 8.13.1
       ws: 8.22.0(bufferutil@4.1.0)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - utf-8-validate
@@ -10992,7 +10996,7 @@ snapshots:
 
   rettime@0.11.12: {}
 
-  rolldown-plugin-dts@0.30.0(@typescript/typescript6@6.0.2)(oxc-resolver@11.24.2)(rolldown@1.3.3)(tsrs@7.1.0-beta.tsrs3):
+  rolldown-plugin-dts@0.30.0(@typescript/typescript6@6.0.2)(oxc-resolver@11.24.2)(rolldown@1.3.3)(tsrs@7.1.0-beta.tsrs4):
     dependencies:
       dts-resolver: 3.0.0(oxc-resolver@11.24.2)
       get-tsconfig: 5.0.0-beta.6
@@ -11000,7 +11004,7 @@ snapshots:
       rolldown: 1.3.3
       yuku: 0.27.0
     optionalDependencies:
-      tsrs: 7.1.0-beta.tsrs3
+      tsrs: 7.1.0-beta.tsrs4
       typescript: '@typescript/typescript6@6.0.2'
     transitivePeerDependencies:
       - '@yuku-toolchain/wasm'
@@ -11194,6 +11198,11 @@ snapshots:
       ip-address: 10.7.4
       smart-buffer: 4.2.0
 
+  socks@2.8.11:
+    dependencies:
+      ip-address: 10.7.4
+      smart-buffer: 4.2.0
+
   sonic-boom@4.2.1:
     dependencies:
       atomic-sleep: 1.0.0
@@ -11349,7 +11358,7 @@ snapshots:
 
   ts-case-convert@2.3.1: {}
 
-  tsdown@0.23.7(@typescript/typescript6@6.0.2)(oxc-resolver@11.24.2)(tsrs@7.1.0-beta.tsrs3)(tsx@4.23.15)(unrun@0.3.1):
+  tsdown@0.23.7(@typescript/typescript6@6.0.2)(oxc-resolver@11.24.2)(tsrs@7.1.0-beta.tsrs4)(tsx@4.23.15)(unrun@0.3.1):
     dependencies:
       cac: 7.1.0
       defu: 6.1.7
@@ -11359,7 +11368,7 @@ snapshots:
       obug: 3.0.0
       picomatch: 4.0.7
       rolldown: 1.3.3
-      rolldown-plugin-dts: 0.30.0(@typescript/typescript6@6.0.2)(oxc-resolver@11.24.2)(rolldown@1.3.3)(tsrs@7.1.0-beta.tsrs3)
+      rolldown-plugin-dts: 0.30.0(@typescript/typescript6@6.0.2)(oxc-resolver@11.24.2)(rolldown@1.3.3)(tsrs@7.1.0-beta.tsrs4)
       tinyexec: 1.3.1
       tinyglobby: 0.2.17
       tinyps: 0.5.1
@@ -11379,16 +11388,16 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsrs@7.1.0-beta.tsrs3:
+  tsrs@7.1.0-beta.tsrs4:
     optionalDependencies:
-      '@tsrs/darwin-arm64': 7.1.0-beta.tsrs3
-      '@tsrs/darwin-x64': 7.1.0-beta.tsrs3
-      '@tsrs/linux-arm64-gnu': 7.1.0-beta.tsrs3
-      '@tsrs/linux-arm64-musl': 7.1.0-beta.tsrs3
-      '@tsrs/linux-x64-gnu': 7.1.0-beta.tsrs3
-      '@tsrs/linux-x64-musl': 7.1.0-beta.tsrs3
-      '@tsrs/win32-arm64': 7.1.0-beta.tsrs3
-      '@tsrs/win32-x64': 7.1.0-beta.tsrs3
+      '@tsrs/darwin-arm64': 7.1.0-beta.tsrs4
+      '@tsrs/darwin-x64': 7.1.0-beta.tsrs4
+      '@tsrs/linux-arm64-gnu': 7.1.0-beta.tsrs4
+      '@tsrs/linux-arm64-musl': 7.1.0-beta.tsrs4
+      '@tsrs/linux-x64-gnu': 7.1.0-beta.tsrs4
+      '@tsrs/linux-x64-musl': 7.1.0-beta.tsrs4
+      '@tsrs/win32-arm64': 7.1.0-beta.tsrs4
+      '@tsrs/win32-x64': 7.1.0-beta.tsrs4
 
   tsx@4.23.15:
     dependencies:
@@ -11472,7 +11481,7 @@ snapshots:
 
   undici@7.30.1: {}
 
-  undici@8.13.0: {}
+  undici@8.13.1: {}
 
   unenv@2.0.0-rc.24:
     dependencies:
