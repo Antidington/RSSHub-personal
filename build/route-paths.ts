@@ -1253,7 +1253,6 @@ export type RoutePath =
   | `/furaffinity/user/:username`
   | `/furaffinity/watchers/:username`
   | `/furaffinity/watching/:username`
-  | `/futunn/`
   | `/futunn/live/:lang?`
   | `/futunn/main`
   | `/futunn/topic/:id`
@@ -3117,6 +3116,8 @@ export type RoutePath =
   | `/shanghaitech/sist/activity`
   | `/shanximuseum/exhibition/temporary/:type?`
   | `/shcstheatre/programs`
+  | `/sherwood/news`
+  | `/sherwood/snacks`
   | `/shiep/:type/:id?`
   | `/shisu/en/:section`
   | `/shisu/news/:section`
