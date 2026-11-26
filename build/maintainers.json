@@ -1327,6 +1327,20 @@
     "Fatpandac",
     "pseudoyu"
   ],
+  "/jandan/:category/:type?": [
+    "kobemtl",
+    "Xuanwo",
+    "xyqfer",
+    "9uanhuo",
+    "nczitzk",
+    "pseudoyu"
+  ],
+  "/jandan/": [
+    "lonelykid",
+    "nczitzk",
+    "bigfei",
+    "pseudoyu"
+  ],
   "/jin10/category/:id": [
     "laampui"
   ],
@@ -11136,6 +11150,9 @@
   "/gov/shenzhen/yantian/ytjsj/:caty?": [
     "nuomi1"
   ],
+  "/gov/shenzhen/zjj/gkmlpt/:caty?": [
+    "nuomi1"
+  ],
   "/gov/shenzhen/hrss/szksy/:caty/:page?": [
     "zlasd"
   ],
@@ -11404,20 +11421,6 @@
   ],
   "/iplaysoft/tag/:slug": [
     "cscnk52"
-  ],
-  "/jandan/": [
-    "lonelykid",
-    "nczitzk",
-    "bigfei",
-    "pseudoyu"
-  ],
-  "/jandan/:category/:type?": [
-    "kobemtl",
-    "Xuanwo",
-    "xyqfer",
-    "9uanhuo",
-    "nczitzk",
-    "pseudoyu"
   ],
   "/japanpost/track/:reqCode/:locale?": [
     "tuzi3040"
@@ -12108,6 +12111,9 @@
   ],
   "/queshu/sale": [
     "kt286"
+  ],
+  "/restofworld/latest": [
+    "ljh12138164"
   ],
   "/ruancan/category/:category?": [
     "nczitzk"
