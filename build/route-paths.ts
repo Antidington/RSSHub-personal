@@ -3302,6 +3302,7 @@ export type RoutePath =
   | `/subhd/sub/:category?`
   | `/subhd/zu/:category?`
   | `/substack/subscribe/:user`
+  | `/supabase/blog`
   | `/supchina/`
   | `/supchina/podcasts`
   | `/supercell/:game/blog/:locale?`
@@ -3492,6 +3493,7 @@ export type RoutePath =
   | `/tokyometro/ridership/:year?`
   | `/tokyu/ridership/:year?`
   | `/tongji/bks`
+  | `/tongji/cs`
   | `/tongji/gs`
   | `/tongji/sem/:type?`
   | `/tongji/sse/:type?`

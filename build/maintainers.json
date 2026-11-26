@@ -12272,6 +12272,9 @@
   "/subhd/zu/:category?": [
     "nczitzk"
   ],
+  "/supabase/blog": [
+    "ljh12138164"
+  ],
   "/suumo/chintai/:pref/:city/:page?": [
     "pseudoyu"
   ],
@@ -12397,6 +12400,9 @@
   ],
   "/tongji/bks": [
     "shiquda"
+  ],
+  "/tongji/cs": [
+    "MXH814"
   ],
   "/tongji/gs": [
     "sitdownkevin"

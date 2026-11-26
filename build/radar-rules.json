@@ -61680,6 +61680,20 @@
       }
     ]
   },
+  "supabase.com": {
+    "_name": "Supabase",
+    ".": [
+      {
+        "title": "Blog",
+        "docs": "https://docs.rsshub.app/routes/supabase",
+        "source": [
+          "/blog",
+          "/blog/*"
+        ],
+        "target": "/supabase/blog"
+      }
+    ]
+  },
   "suumo.jp": {
     "_name": "SUUMO",
     ".": [
@@ -62156,6 +62170,16 @@
           "/"
         ],
         "target": "/tongji/bks"
+      }
+    ],
+    "cs": [
+      {
+        "title": "计算机科学与技术学院通知公告",
+        "docs": "https://docs.rsshub.app/routes/tongji",
+        "source": [
+          "/index/tzgg.htm"
+        ],
+        "target": "/tongji/cs"
       }
     ],
     "gs": [
